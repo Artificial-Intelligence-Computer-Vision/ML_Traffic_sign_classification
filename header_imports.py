@@ -51,6 +51,7 @@ from keras.layers import Conv2D, MaxPooling2D
 import matplotlib.pyplot as plt
 from keras import layers
 from tensorflow.keras.utils import to_categorical
+from keras.callbacks import EarlyStopping,ReduceLROnPlateau
 import glob
 import shutil
 import tensorflow as tf
