@@ -24,6 +24,50 @@ class computer_vision_building(object):
         self.valid_images = [".jpg",".png"]
         self.input_shape = None
         self.advanced_categories = ["0", "1", "2", "2","3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22","23", "24", "25", "26", "27", "28", "29", "30","31", "32", "33", "34", "35", "36", "37", "38","39", "40", "41", "42"]
+        
+        self.category_names = ["Speed limit (20km/h)",
+            			"Speed limit (30km/h)", 
+            			"Speed limit (50km/h)", 
+            			"Speed limit (60km/h)", 
+            			"Speed limit (70km/h)", 
+            			"Speed limit (80km/h)", 
+            			"End of speed limit (80km/h)", 
+            			"Speed limit (100km/h)", 
+            			"Speed limit (120km/h)", 
+            			"No passing", 
+            			"No passing for vehicles over 3.5 metric tons", 
+            			"Right-of-way at intersection", 
+            			"Priority road", 
+            			"Yield", 
+            			"Stop", 
+            			"No vehicles", 
+            			"Vehicles over 3.5 metric tons prohibited", 
+            			"No entry", 
+            			"General caution", 
+            			"Dangerous curve left", 
+            			"Dangerous curve right", 
+            			"Double curve", 
+            			"Bumpy road", 
+            			"Slippery road", 
+            			"Road narrows on the right", 
+            			"Road work", 
+            			"Traffic signals", 
+            			"Pedestrians", 
+            			"Children crossing", 
+            			"Bicycles crossing", 
+            			"Beware of ice/snow",
+            			"Wild animals crossing", 
+            			"End speed + passing limits", 
+            			"Turn right ahead", 
+            			"Turn left ahead", 
+            			"Ahead only", 
+            			"Go straight or right", 
+            			"Go straight or left", 
+            			"Keep right", 
+            			"Keep left", 
+            			"Roundabout mandatory", 
+            			"End of no passing", 
+            			"End of no passing by vehicles over 3.5 metric tons"]
 
         # Split training data variables
         self.X_train = None
@@ -284,7 +328,7 @@ class computer_vision_building(object):
 
     def get_categories(self):
         # Number of categories
-        return self.advanced_categories
+        return self.category_names
 
 
     def create_models_1(self):
@@ -293,25 +337,25 @@ class computer_vision_building(object):
 
         # First Hitten Layer with 64, 7, 7
         self.model.add(Conv2D(64,(7,7), strides = (1,1), padding="same", input_shape = self.input_shape, activation = "relu"))
-        self.model.add(Activation('relu'))
+        self.model.add(Activation("relu"))
         self.model.add(MaxPooling2D(pool_size = (4,4)))
         self.model.add(Dropout(0.25))
     
         # Second Hitten Layer 32, 7, 7
         self.model.add(Conv2D(32,(7,7), strides = (1,1), padding="same", activation = "relu"))
-        self.model.add(Activation('relu'))
+        self.model.add(Activation("relu"))
         self.model.add(MaxPooling2D(pool_size = (2,2)))
         self.model.add(Dropout(0.25))
     
         # Third Hitten Layer 32, 7, 7
         self.model.add(Conv2D(16,(7,7), strides = (1,1), padding="same", activation = "relu"))
-        self.model.add(Activation('relu'))
+        self.model.add(Activation("relu"))
         self.model.add(MaxPooling2D(pool_size = (1,1)))
         self.model.add(Dropout(0.25))
     
         # last layer, output Layer
         self.model.add(Flatten())
-        self.model.add(Dense(units = self.number_classes, activation = 'softmax', input_dim=2))
+        self.model.add(Dense(units = self.number_classes, activation = "softmax", input_dim=2))
 
         self.model.compile(loss = "binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
@@ -323,35 +367,25 @@ class computer_vision_building(object):
 
         self.model = Sequential()
 
-        self.model.add(Conv2D(64, (7,7), input_shape = self.input_shape))
-        self.model.add(Activation("relu"))
-        self.model.add(MaxPooling2D(pool_size = (2,2))) # Pooling
+        self.model.add(Conv2D(filters=32, kernel_size=(3,3), activation="relu", input_shape = self.input_shape))
+        self.model.add(Conv2D(filters=32, kernel_size=(3,3), activation="relu"))
 
-        self.model.add(Conv2D(32, (7,7), input_shape = self.input_shape))
-        self.model.add(Activation("relu"))
-        self.model.add(MaxPooling2D(pool_size = (2,2))) # Pooling
-        
-        self.model.add(Conv2D(16, (7,7), input_shape = self.input_shape))
-        self.model.add(Activation("relu"))
-        self.model.add(MaxPooling2D(pool_size = (2,2))) # Pooling
-        
-        self.model.add(Conv2D(8, (7,7), input_shape = self.input_shape))
-        self.model.add(Activation("relu"))
-        self.model.add(MaxPooling2D(pool_size = (2,2))) # Pooling
+        self.model.add(MaxPool2D(pool_size=(2, 2)))
+        self.model.add(Dropout(rate=0.25))
 
-        self.model.add(Flatten())        
-        self.model.add(Dense(units = self.number_classes, activation = 'softmax', input_dim=2))
+        self.model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
+        self.model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
 
-        self.model.add(Dense(units = self.number_classes, activation = 'softmax', input_dim=2))
-        self.model.add(Activation('sigmoid'))
-
-        # last layer, output Layer
+        self.model.add(MaxPool2D(pool_size=(2, 2)))
+        self.model.add(Dropout(rate=0.25))
         self.model.add(Flatten())
-        self.model.add(Dense(units = self.number_classes, activation = 'softmax', input_dim=2))
 
-        self.model.compile(loss = 'binary_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
-
+        self.model.add(Dense(512, activation="relu"))
+        self.model.add(Dropout(rate=0.5))
+        self.model.add(Dense(units = self.number_classes, activation="softmax"))
+	
         return self.model
+
 
 
     def create_model_3(self):
@@ -364,9 +398,9 @@ class computer_vision_building(object):
         self.MyConv()
 
         self.model.add(Flatten())
-        self.model.add(Dense(units = self.number_classes, activation = 'softmax', input_dim=2))
+        self.model.add(Dense(units = self.number_classes, activation = "softmax", input_dim=2))
 
-        self.model.compile(loss = 'binary_crossentropy', optimizer ='adam', metrics= ['accuracy'])
+        self.model.compile(loss = "binary_crossentropy", optimizer ="adam", metrics= ["accuracy"])
         
         return self.model
 
@@ -375,18 +409,18 @@ class computer_vision_building(object):
     def MyConv(self, first = False):
 
         if first == False:
-            self.model.add(Conv2D(64, (4, 4),strides = (1,1), padding='same',
+            self.model.add(Conv2D(64, (4, 4),strides = (1,1), padding="same",
                 input_shape = self.input_shape))
         else:
-            self.model.add(Conv2D(64, (4, 4),strides = (1,1), padding='same',
+            self.model.add(Conv2D(64, (4, 4),strides = (1,1), padding="same",
                  input_shape = self.input_shape))
     
-        self.model.add(Activation('relu'))
+        self.model.add(Activation("relu"))
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
         self.model.add(Dropout(0.5))
 
-        self.model.add(Conv2D(32, (4, 4),strides = (1,1),padding='same'))
-        self.model.add(Activation('relu'))
+        self.model.add(Conv2D(32, (4, 4),strides = (1,1),padding="same"))
+        self.model.add(Activation("relu"))
         self.model.add(Dropout(0.25))
 
 

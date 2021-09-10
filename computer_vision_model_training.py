@@ -20,7 +20,7 @@ class computer_vision_training(object):
         self.Y_test_vec = xy_data[4]
         
         self.batch_size = [10, 20, 40, 60, 80, 100]
-        self.epochs = [1, 5, 10, 50, 100, 200]
+        self.epochs = [1, 5, 15, 50, 100, 200]
         self.param_grid = dict(batch_size = self.batch_size, epochs = self.epochs)
         self.callbacks = keras.callbacks.EarlyStopping(monitor='val_acc', patience=4, verbose=1)
         
@@ -47,7 +47,7 @@ class computer_vision_training(object):
         self.computer_vision_model = self.model.fit(self.X_train, self.Y_train,
                 batch_size=self.batch_size[2],
                 validation_split=0.15,
-                epochs=self.epochs[3],
+                epochs=self.epochs[2],
                 callbacks=[self.callbacks],
                 shuffle=True)
 
