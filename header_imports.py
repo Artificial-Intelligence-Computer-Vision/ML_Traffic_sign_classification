@@ -9,10 +9,12 @@ import warnings
 import pdb 
 from glob import glob
 from os.path import basename
+import os, os.path
 import sys
 from PIL import Image
 from tensorflow import keras
 import tensorflow as tf
+
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import preprocessing
@@ -40,23 +42,27 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_recall_curve, average_precision_score, auc
 from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
-from keras.wrappers.scikit_learn import KerasClassifier
+#from keras.wrappers.scikit_learn import KerasClassifier
 import keras
+
 from keras.datasets import cifar10
 import keras.backend as K
 from keras.preprocessing.image import ImageDataGenerator
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers import Conv2D, MaxPooling2D
+
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Conv2D, Flatten, Dense, MaxPooling2D, Dropout, Activation
+from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping
+
+#from keras.models import Sequential
+#from keras.layers import Dense, Dropout, Activation, Flatten
+#from keras.layers import MaxPooling2D
+
 import matplotlib.pyplot as plt
-from keras import layers
 from tensorflow.keras.utils import to_categorical
-from keras.callbacks import EarlyStopping,ReduceLROnPlateau
 import glob
 import shutil
-import tensorflow as tf
 import matplotlib.image as img
-import os, os.path
+
 # For saving models
 from contextlib import redirect_stdout
 import shutil
