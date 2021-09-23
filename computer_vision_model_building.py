@@ -1,8 +1,8 @@
 from header_imports import *
 
-class computer_vision_building_1(object):
+class computer_vision_building(object):
 
-    def __init__(self, model_type, image_type):
+    def __init__(self, model_type, image_type, category):
 
 
         self.images = []
@@ -25,8 +25,9 @@ class computer_vision_building_1(object):
         self.input_shape = None
         self.advanced_categories = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30","31", "32", "33", "34", "35", "36", "37", "38","39", "40", "41", "42"]
         
-        self.advanced_categories_1 = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"]
-        self.advanced_categories_2 = ["22", "23", "24", "25", "26", "27", "28", "29", "30","31", "32", "33", "34", "35", "36", "37", "38","39", "40", "41", "42"]
+        self.advanced_categories_1 = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14"]
+        self.advanced_categories_2 = ["15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"]
+        self.advanced_categories_3 = ["29", "30","31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42"]
         
         self.category_names = ["Speed limit (20km/h)",
             			"Speed limit (30km/h)", 
@@ -72,6 +73,7 @@ class computer_vision_building_1(object):
             			"End of no passing", 
             			"End of no passing by vehicles over 3.5 metric tons"]
             			
+            			
         self.category_names_1 = ["Speed limit (20km/h)",
             			"Speed limit (30km/h)", 
             			"Speed limit (50km/h)", 
@@ -86,17 +88,54 @@ class computer_vision_building_1(object):
             			"Right-of-way at intersection", 
             			"Priority road", 
             			"Yield", 
-            			"Stop", 
-            			"No vehicles", 
+            			"Stop"]
+            			
+            			
+        self.category_names_2 = ["No vehicles", 
             			"Vehicles over 3.5 metric tons prohibited", 
             			"No entry", 
             			"General caution", 
             			"Dangerous curve left", 
             			"Dangerous curve right", 
-            			"Double curve"]
+            			"Double curve", 
+            			"Bumpy road", 
+            			"Slippery road", 
+            			"Road narrows on the right", 
+            			"Road work", 
+            			"Traffic signals", 
+            			"Pedestrians", 
+            			"Children crossing"]
             			
             			
+        self.category_names_3 = ["Bicycles crossing", 
+            			"Beware of ice/snow",
+            			"Wild animals crossing", 
+            			"End speed + passing limits", 
+            			"Turn right ahead", 
+            			"Turn left ahead", 
+            			"Ahead only", 
+            			"Go straight or right", 
+            			"Go straight or left", 
+            			"Keep right", 
+            			"Keep left", 
+            			"Roundabout mandatory", 
+            			"End of no passing", 
+            			"End of no passing by vehicles over 3.5 metric tons"]
 
+	
+	
+        self.category = category
+	
+        if self.category == "category_1":
+            self.category_names = self.category_names_1
+        elif self.category == "category_2":
+            self.category_names = self.category_names_2
+        elif self.category == "category_3":
+            self.category_names = self.category_names_3
+        else:
+            self.category_names = self.category_names
+	
+	
         # Split training data variables
         self.X_train = None
         self.X_test = None
@@ -112,56 +151,113 @@ class computer_vision_building_1(object):
         self.optimizer = keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999)
         self.create_model_type = model_type
         
-        # Check validity
-        self.check_valid(self.advanced_categories_1[0])
-        self.check_valid(self.advanced_categories_1[1])
-        self.check_valid(self.advanced_categories_1[2])
-        self.check_valid(self.advanced_categories_1[3])
-        self.check_valid(self.advanced_categories_1[4])
-        self.check_valid(self.advanced_categories_1[5])
-        self.check_valid(self.advanced_categories_1[6])
-        self.check_valid(self.advanced_categories_1[7])
-        self.check_valid(self.advanced_categories_1[8])
-        self.check_valid(self.advanced_categories_1[9])
-        self.check_valid(self.advanced_categories_1[10])
-        self.check_valid(self.advanced_categories_1[11])
-        self.check_valid(self.advanced_categories_1[12])
-        self.check_valid(self.advanced_categories_1[13])
-        self.check_valid(self.advanced_categories_1[14])
-        self.check_valid(self.advanced_categories_1[15])
-        self.check_valid(self.advanced_categories_1[16])
-        self.check_valid(self.advanced_categories_1[17])
-        self.check_valid(self.advanced_categories_1[18])
-        self.check_valid(self.advanced_categories_1[19])
-        self.check_valid(self.advanced_categories_1[20])
-        self.check_valid(self.advanced_categories_1[21])
-        
+        if self.category == "category_1":
+	    # Check validity
+            self.check_valid(self.advanced_categories_1[0])
+            self.check_valid(self.advanced_categories_1[1])
+            self.check_valid(self.advanced_categories_1[2])
+            self.check_valid(self.advanced_categories_1[3])
+            self.check_valid(self.advanced_categories_1[4])
+            self.check_valid(self.advanced_categories_1[5])
+            self.check_valid(self.advanced_categories_1[6])
+            self.check_valid(self.advanced_categories_1[7])
+            self.check_valid(self.advanced_categories_1[8])
+            self.check_valid(self.advanced_categories_1[9])
+            self.check_valid(self.advanced_categories_1[10])
+            self.check_valid(self.advanced_categories_1[11])
+            self.check_valid(self.advanced_categories_1[12])
+            self.check_valid(self.advanced_categories_1[13])
+            self.check_valid(self.advanced_categories_1[14])
+        	
+        elif self.category == "category_2":
+	    # Check validity
+            self.check_valid(self.advanced_categories_2[0])
+            self.check_valid(self.advanced_categories_2[1])
+            self.check_valid(self.advanced_categories_2[2])
+            self.check_valid(self.advanced_categories_2[3])
+            self.check_valid(self.advanced_categories_2[4])
+            self.check_valid(self.advanced_categories_2[5])
+            self.check_valid(self.advanced_categories_2[6])
+            self.check_valid(self.advanced_categories_2[7])
+            self.check_valid(self.advanced_categories_2[8])
+            self.check_valid(self.advanced_categories_2[9])
+            self.check_valid(self.advanced_categories_2[10])
+            self.check_valid(self.advanced_categories_2[11])
+            self.check_valid(self.advanced_categories_2[12])
+            self.check_valid(self.advanced_categories_2[13])
 
-            
-        # Resize image
-        self.resize_image_and_label_image(self.advanced_categories_1[0])
-        self.resize_image_and_label_image(self.advanced_categories_1[1])
-        self.resize_image_and_label_image(self.advanced_categories_1[2])
-        self.resize_image_and_label_image(self.advanced_categories_1[3])
-        self.resize_image_and_label_image(self.advanced_categories_1[4])
-        self.resize_image_and_label_image(self.advanced_categories_1[5])
-        self.resize_image_and_label_image(self.advanced_categories_1[6])
-        self.resize_image_and_label_image(self.advanced_categories_1[7])
-        self.resize_image_and_label_image(self.advanced_categories_1[8])
-        self.resize_image_and_label_image(self.advanced_categories_1[9])
-        self.resize_image_and_label_image(self.advanced_categories_1[10])
-        self.resize_image_and_label_image(self.advanced_categories_1[11])
-        self.resize_image_and_label_image(self.advanced_categories_1[12])
-        self.resize_image_and_label_image(self.advanced_categories_1[13])
-        self.resize_image_and_label_image(self.advanced_categories_1[14])
-        self.resize_image_and_label_image(self.advanced_categories_1[15])
-        self.resize_image_and_label_image(self.advanced_categories_1[16])
-        self.resize_image_and_label_image(self.advanced_categories_1[17])
-        self.resize_image_and_label_image(self.advanced_categories_1[18])
-        self.resize_image_and_label_image(self.advanced_categories_1[19])
-        self.resize_image_and_label_image(self.advanced_categories_1[20])
-        self.resize_image_and_label_image(self.advanced_categories_1[21])
+        elif self.category == "category_3":
+	    # Check validity
+            self.check_valid(self.advanced_categories_3[0])
+            self.check_valid(self.advanced_categories_3[1])
+            self.check_valid(self.advanced_categories_3[2])
+            self.check_valid(self.advanced_categories_3[3])
+            self.check_valid(self.advanced_categories_3[4])
+            self.check_valid(self.advanced_categories_3[5])
+            self.check_valid(self.advanced_categories_3[6])
+            self.check_valid(self.advanced_categories_3[7])
+            self.check_valid(self.advanced_categories_3[8])
+            self.check_valid(self.advanced_categories_3[9])
+            self.check_valid(self.advanced_categories_3[10])
+            self.check_valid(self.advanced_categories_3[11])
+            self.check_valid(self.advanced_categories_3[12])
+            self.check_valid(self.advanced_categories_3[13])
+		
 
+
+
+        if self.category == "category_1":
+	    # Resize image
+            self.resize_image_and_label_image(self.advanced_categories_1[0])
+            self.resize_image_and_label_image(self.advanced_categories_1[1])
+            self.resize_image_and_label_image(self.advanced_categories_1[2])
+            self.resize_image_and_label_image(self.advanced_categories_1[3])
+            self.resize_image_and_label_image(self.advanced_categories_1[4])
+            self.resize_image_and_label_image(self.advanced_categories_1[5])
+            self.resize_image_and_label_image(self.advanced_categories_1[6])
+            self.resize_image_and_label_image(self.advanced_categories_1[7])
+            self.resize_image_and_label_image(self.advanced_categories_1[8])
+            self.resize_image_and_label_image(self.advanced_categories_1[9])
+            self.resize_image_and_label_image(self.advanced_categories_1[10])
+            self.resize_image_and_label_image(self.advanced_categories_1[11])
+            self.resize_image_and_label_image(self.advanced_categories_1[12])
+            self.resize_image_and_label_image(self.advanced_categories_1[13])
+            self.resize_image_and_label_image(self.advanced_categories_1[14])
+        	
+        elif self.category == "category_2":
+	    # Resize image
+            self.resize_image_and_label_image(self.advanced_categories_2[0])
+            self.resize_image_and_label_image(self.advanced_categories_2[1])
+            self.resize_image_and_label_image(self.advanced_categories_2[2])
+            self.resize_image_and_label_image(self.advanced_categories_2[3])
+            self.resize_image_and_label_image(self.advanced_categories_2[4])
+            self.resize_image_and_label_image(self.advanced_categories_2[5])
+            self.resize_image_and_label_image(self.advanced_categories_2[6])
+            self.resize_image_and_label_image(self.advanced_categories_2[7])
+            self.resize_image_and_label_image(self.advanced_categories_2[8])
+            self.resize_image_and_label_image(self.advanced_categories_2[9])
+            self.resize_image_and_label_image(self.advanced_categories_2[10])
+            self.resize_image_and_label_image(self.advanced_categories_2[11])
+            self.resize_image_and_label_image(self.advanced_categories_2[12])
+            self.resize_image_and_label_image(self.advanced_categories_2[13])
+
+        elif self.category == "category_3":
+	    # Resize image
+            self.resize_image_and_label_image(self.advanced_categories_3[0])
+            self.resize_image_and_label_image(self.advanced_categories_3[1])
+            self.resize_image_and_label_image(self.advanced_categories_3[2])
+            self.resize_image_and_label_image(self.advanced_categories_3[3])
+            self.resize_image_and_label_image(self.advanced_categories_3[4])
+            self.resize_image_and_label_image(self.advanced_categories_3[5])
+            self.resize_image_and_label_image(self.advanced_categories_3[6])
+            self.resize_image_and_label_image(self.advanced_categories_3[7])
+            self.resize_image_and_label_image(self.advanced_categories_3[8])
+            self.resize_image_and_label_image(self.advanced_categories_3[9])
+            self.resize_image_and_label_image(self.advanced_categories_3[10])
+            self.resize_image_and_label_image(self.advanced_categories_3[11])
+            self.resize_image_and_label_image(self.advanced_categories_3[12])
+            self.resize_image_and_label_image(self.advanced_categories_3[13])
+        	
         
         # Numpy array
         self.image_file = np.array(self.image_file)
@@ -315,7 +411,7 @@ class computer_vision_building_1(object):
 
     def get_categories(self):
         # Number of categories
-        return self.category_names_1
+        return self.category_names
 
 
     def create_models_1(self):
