@@ -133,7 +133,7 @@ class computer_vision_building(object):
         elif self.category == "category_3":
             self.category_names = self.category_names_3
         elif self.category == "normal":
-            self.category_names = self.category
+            self.category_names = self.categories
         else:
             self.category_names = self.category_names
 	
