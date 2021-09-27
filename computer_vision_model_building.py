@@ -2,7 +2,7 @@ from header_imports import *
 
 class computer_vision_building(object):
 
-    def __init__(self, model_type, image_type, category):
+    def __init__(self, model_type, image_type, category, category_type = "normal"):
 
 
         self.images = []
@@ -16,6 +16,8 @@ class computer_vision_building(object):
         self.true_path  = "traffic_signs/"
         self.image_type = image_type
 
+        self.category_type = category_type
+
 
         # Determine
         if self.image_type == "normal":
@@ -25,6 +27,8 @@ class computer_vision_building(object):
         self.input_shape = None
         self.advanced_categories = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30","31", "32", "33", "34", "35", "36", "37", "38","39", "40", "41", "42"]
         
+        self.categories = ["One Way Right", "Slow Xing", "Yield", "One Way Left", "Traffic Light Sign", "Stop", "Ducky"]
+
         self.advanced_categories_1 = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14"]
         self.advanced_categories_2 = ["15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"]
         self.advanced_categories_3 = ["29", "30","31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42"]
@@ -121,7 +125,6 @@ class computer_vision_building(object):
             			"Roundabout mandatory", 
             			"End of no passing", 
             			"End of no passing by vehicles over 3.5 metric tons"]
-
 	
 	
         self.category = category
@@ -152,7 +155,7 @@ class computer_vision_building(object):
         self.create_model_type = model_type
         
         if self.category == "category_1":
-	    # Check validity
+	        # Check validity
             self.check_valid(self.advanced_categories_1[0])
             self.check_valid(self.advanced_categories_1[1])
             self.check_valid(self.advanced_categories_1[2])
@@ -170,7 +173,7 @@ class computer_vision_building(object):
             self.check_valid(self.advanced_categories_1[14])
         	
         elif self.category == "category_2":
-	    # Check validity
+	        # Check validity
             self.check_valid(self.advanced_categories_2[0])
             self.check_valid(self.advanced_categories_2[1])
             self.check_valid(self.advanced_categories_2[2])
@@ -187,7 +190,7 @@ class computer_vision_building(object):
             self.check_valid(self.advanced_categories_2[13])
 
         elif self.category == "category_3":
-	    # Check validity
+	        # Check validity
             self.check_valid(self.advanced_categories_3[0])
             self.check_valid(self.advanced_categories_3[1])
             self.check_valid(self.advanced_categories_3[2])
@@ -207,7 +210,7 @@ class computer_vision_building(object):
 
 
         if self.category == "category_1":
-	    # Resize image
+	        # Resize image
             self.resize_image_and_label_image(self.advanced_categories_1[0])
             self.resize_image_and_label_image(self.advanced_categories_1[1])
             self.resize_image_and_label_image(self.advanced_categories_1[2])
@@ -225,7 +228,7 @@ class computer_vision_building(object):
             self.resize_image_and_label_image(self.advanced_categories_1[14])
         	
         elif self.category == "category_2":
-	    # Resize image
+	        # Resize image
             self.resize_image_and_label_image(self.advanced_categories_2[0])
             self.resize_image_and_label_image(self.advanced_categories_2[1])
             self.resize_image_and_label_image(self.advanced_categories_2[2])
@@ -242,7 +245,7 @@ class computer_vision_building(object):
             self.resize_image_and_label_image(self.advanced_categories_2[13])
 
         elif self.category == "category_3":
-	    # Resize image
+	        # Resize image
             self.resize_image_and_label_image(self.advanced_categories_3[0])
             self.resize_image_and_label_image(self.advanced_categories_3[1])
             self.resize_image_and_label_image(self.advanced_categories_3[2])
@@ -259,6 +262,11 @@ class computer_vision_building(object):
             self.resize_image_and_label_image(self.advanced_categories_3[13])
         	
         
+        if self.category_type == "not_normal":
+
+
+
+
         # Numpy array
         self.image_file = np.array(self.image_file)
         self.label_name = np.array(self.label_name)
