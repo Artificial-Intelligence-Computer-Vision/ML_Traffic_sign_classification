@@ -148,7 +148,7 @@ class computer_vision_building(object):
         # model summary path 
         self.model_summary = "model_summary/"
 
-        self.optimizer = keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999)
+        self.optimizer = tf.keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999)
         self.create_model_type = model_type
         
         if self.category == "category_1":
@@ -389,7 +389,7 @@ class computer_vision_building(object):
 
     # Split training data and testing Data and makes it random and normalized it
     def splitting_data_normalize(self):
-        self.X_train, self.X_test, self.Y_train_vec, self.Y_test_vec = train_test_split(self.image_file, self.label_name, test_size = 0.10, random_state = 42)
+        self.X_train, self.X_test, self.Y_train_vec, self.Y_test_vec = train_test_split(self.image_file, self.label_name, test_size = 0.15, random_state = 42)
 
         self.input_shape = self.X_train.shape[1:]
         

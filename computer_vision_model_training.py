@@ -2,14 +2,15 @@ from header_imports import *
 from computer_vision_model_building import *
 
 class computer_vision_training(object):
-    def __init__(self, model_type, image_type):
+    def __init__(self, model_type, image_type, category):
         
         self.number_classes = 43
         self.model_type = str(model_type)
         self.image_type = str(image_type)
+        self.category = str(category)
         
         # Category 1
-        computer_vision_building_obj = computer_vision_building(model_type = self.model_type, image_type = self.image_type, category = "category_1")
+        computer_vision_building_obj = computer_vision_building(model_type = self.model_type, image_type = self.image_type, category = self.category)
         self.model = computer_vision_building_obj.get_model()
         
         xy_data = computer_vision_building_obj.get_data()
@@ -40,8 +41,6 @@ class computer_vision_training(object):
         self.plot_model()
         self.plot_random_examples()
         
-        
-
 
 
     #  Training model 
