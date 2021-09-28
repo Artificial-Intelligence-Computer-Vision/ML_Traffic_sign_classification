@@ -55,7 +55,7 @@ class computer_vision_training(object):
         self.computer_vision_model = self.model.fit(self.X_train, self.Y_train,
                 batch_size=self.batch_size[2],
                 validation_split=0.10,
-                epochs=self.epochs[0],
+                epochs=self.epochs[3],
                 callbacks=[self.callbacks_2],
                 shuffle=True)
 
@@ -107,7 +107,7 @@ class computer_vision_training(object):
         plt.figure( dpi=256)
         predicted_classes = self.model.predict_classes(self.X_test)
 
-        for i in range(25):
+        for i in range(14):
             plt.subplot(5,5,i+1)
             fig=plt.imshow(self.X_test[i,:,:,:])
             plt.axis('off')
