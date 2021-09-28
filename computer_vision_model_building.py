@@ -12,19 +12,20 @@ class computer_vision_building(object):
         self.label_name = []
         self.number_classes = 43
         self.image_size = 240
-        self.path = "Data/"
-        self.true_path  = "traffic_signs/"
+        self.path  = "traffic_signs/"
         self.image_type = image_type
 
 
         # Determine
         if self.image_type == "normal":
-            self.true_path = self.true_path + "Train/"
-            
+            self.true_path = self.path + "Train/"
+        
         self.valid_images = [".jpg",".png"]
         self.input_shape = None
         self.advanced_categories = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30","31", "32", "33", "34", "35", "36", "37", "38","39", "40", "41", "42"]
         
+        self.categories = ["One Way Right", "Slow Xing", "Yield", "One Way Left", "Traffic Light Sign", "Stop", "Ducky"]
+
         self.advanced_categories_1 = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14"]
         self.advanced_categories_2 = ["15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"]
         self.advanced_categories_3 = ["29", "30","31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42"]
@@ -73,7 +74,6 @@ class computer_vision_building(object):
             			"End of no passing", 
             			"End of no passing by vehicles over 3.5 metric tons"]
             			
-            			
         self.category_names_1 = ["Speed limit (20km/h)",
             			"Speed limit (30km/h)", 
             			"Speed limit (50km/h)", 
@@ -121,17 +121,23 @@ class computer_vision_building(object):
             			"Roundabout mandatory", 
             			"End of no passing", 
             			"End of no passing by vehicles over 3.5 metric tons"]
-
 	
 	
         self.category = category
 	
+        if  self.category == "normal":
+            self.true_path = self.path + "Small_Traffic_Sign/"
+
+
         if self.category == "category_1":
             self.category_names = self.category_names_1
         elif self.category == "category_2":
             self.category_names = self.category_names_2
         elif self.category == "category_3":
             self.category_names = self.category_names_3
+        elif self.category == "normal":
+            self.category_names = self.categories
+
         else:
             self.category_names = self.category_names
 	
@@ -152,7 +158,7 @@ class computer_vision_building(object):
         self.create_model_type = model_type
         
         if self.category == "category_1":
-	    # Check validity
+	        # Check validity
             self.check_valid(self.advanced_categories_1[0])
             self.check_valid(self.advanced_categories_1[1])
             self.check_valid(self.advanced_categories_1[2])
@@ -170,7 +176,7 @@ class computer_vision_building(object):
             self.check_valid(self.advanced_categories_1[14])
         	
         elif self.category == "category_2":
-	    # Check validity
+	        # Check validity
             self.check_valid(self.advanced_categories_2[0])
             self.check_valid(self.advanced_categories_2[1])
             self.check_valid(self.advanced_categories_2[2])
@@ -187,7 +193,7 @@ class computer_vision_building(object):
             self.check_valid(self.advanced_categories_2[13])
 
         elif self.category == "category_3":
-	    # Check validity
+	        # Check validity
             self.check_valid(self.advanced_categories_3[0])
             self.check_valid(self.advanced_categories_3[1])
             self.check_valid(self.advanced_categories_3[2])
@@ -202,12 +208,23 @@ class computer_vision_building(object):
             self.check_valid(self.advanced_categories_3[11])
             self.check_valid(self.advanced_categories_3[12])
             self.check_valid(self.advanced_categories_3[13])
+
+        elif self.category == "normal":
+            # Check validity
+            self.check_valid(self.categories[0])
+            self.check_valid(self.categories[1])
+            self.check_valid(self.categories[2])
+            self.check_valid(self.categories[3])
+            self.check_valid(self.categories[4])
+            self.check_valid(self.categories[5])
+            self.check_valid(self.categories[6])
+
 		
 
 
 
         if self.category == "category_1":
-	    # Resize image
+	        # Resize image
             self.resize_image_and_label_image(self.advanced_categories_1[0])
             self.resize_image_and_label_image(self.advanced_categories_1[1])
             self.resize_image_and_label_image(self.advanced_categories_1[2])
@@ -225,7 +242,7 @@ class computer_vision_building(object):
             self.resize_image_and_label_image(self.advanced_categories_1[14])
         	
         elif self.category == "category_2":
-	    # Resize image
+	        # Resize image
             self.resize_image_and_label_image(self.advanced_categories_2[0])
             self.resize_image_and_label_image(self.advanced_categories_2[1])
             self.resize_image_and_label_image(self.advanced_categories_2[2])
@@ -242,7 +259,7 @@ class computer_vision_building(object):
             self.resize_image_and_label_image(self.advanced_categories_2[13])
 
         elif self.category == "category_3":
-	    # Resize image
+	        # Resize image
             self.resize_image_and_label_image(self.advanced_categories_3[0])
             self.resize_image_and_label_image(self.advanced_categories_3[1])
             self.resize_image_and_label_image(self.advanced_categories_3[2])
@@ -258,7 +275,19 @@ class computer_vision_building(object):
             self.resize_image_and_label_image(self.advanced_categories_3[12])
             self.resize_image_and_label_image(self.advanced_categories_3[13])
         	
-        
+        elif self.category == "normal":
+            # Resize image
+            self.resize_image_and_label_image(self.categories[0])
+            self.resize_image_and_label_image(self.categories[1])
+            self.resize_image_and_label_image(self.categories[2])
+            self.resize_image_and_label_image(self.categories[3])
+            self.resize_image_and_label_image(self.categories[4])
+            self.resize_image_and_label_image(self.categories[5])
+            self.resize_image_and_label_image(self.categories[6])
+
+
+
+
         # Numpy array
         self.image_file = np.array(self.image_file)
         self.label_name = np.array(self.label_name)
@@ -295,101 +324,121 @@ class computer_vision_building(object):
             image_resized = cv2.imread(os.path.join(self.true_path + input_file,image))
             image_resized = cv2.resize(image_resized,(self.image_size, self.image_size), interpolation = cv2.INTER_AREA)
             self.image_file.append(image_resized)
+            if self.category != "normal":
 
-            if input_file == "0":
-                self.label_name.append(0)
-            elif input_file == "1":
-                self.label_name.append(1)
-            elif input_file == "2":
-                self.label_name.append(2)
-            elif input_file == "3":
-                self.label_name.append(3)
-            elif input_file == "4":
-                self.label_name.append(4)
-            elif input_file == "5":
-                self.label_name.append(5)
-            elif input_file == "6":
-                self.label_name.append(6)
-            elif input_file == "7":
-                self.label_name.append(7)
-            elif input_file == "8":
-                self.label_name.append(8)
-            elif input_file == "9":
-                self.label_name.append(9)
-            elif input_file == "10":
-                self.label_name.append(10)
-            elif input_file == "11":
-                self.label_name.append(11)
-            elif input_file == "12":
-                self.label_name.append(12)
-            elif input_file == "13":
-                self.label_name.append(13)
-            elif input_file == "14":
-                self.label_name.append(14)
-            elif input_file == "15":
-                self.label_name.append(15)
-            elif input_file == "16":
-                self.label_name.append(16)
-            elif input_file == "17":
-                self.label_name.append(17)
-            elif input_file == "18":
-                self.label_name.append(18)
-            elif input_file == "19":
-                self.label_name.append(19)
-            elif input_file == "20":
-                self.label_name.append(20)
-            elif input_file == "21":
-                self.label_name.append(21)
-            elif input_file == "22":
-                self.label_name.append(22)
-            elif input_file == "23":
-                self.label_name.append(23)
-            elif input_file == "24":
-                self.label_name.append(24)
-            elif input_file == "25":
-                self.label_name.append(25)
-            elif input_file == "26":
-                self.label_name.append(26)
-            elif input_file == "27":
-                self.label_name.append(27)
-            elif input_file == "28":
-                self.label_name.append(28)
-            elif input_file == "29":
-                self.label_name.append(29)
-            elif input_file == "30":
-                self.label_name.append(30)
-            elif input_file == "31":
-                self.label_name.append(31)
-            elif input_file == "32":
-                self.label_name.append(32)
-            elif input_file == "33":
-                self.label_name.append(33)
-            elif input_file == "34":
-                self.label_name.append(34)
-            elif input_file == "35":
-                self.label_name.append(35)
-            elif input_file == "36":
-                self.label_name.append(36)
-            elif input_file == "37":
-                self.label_name.append(37)
-            elif input_file == "38":
-                self.label_name.append(38)
-            elif input_file == "39":
-                self.label_name.append(39)
-            elif input_file == "40":
-                self.label_name.append(40)
-            elif input_file == "41":
-                self.label_name.append(41)
-            elif input_file == "42":
-                self.label_name.append(42)
+                if input_file == "0":
+                    self.label_name.append(0)
+                elif input_file == "1":
+                    self.label_name.append(1)
+                elif input_file == "2":
+                    self.label_name.append(2)
+                elif input_file == "3":
+                    self.label_name.append(3)
+                elif input_file == "4":
+                    self.label_name.append(4)
+                elif input_file == "5":
+                    self.label_name.append(5)
+                elif input_file == "6":
+                    self.label_name.append(6)
+                elif input_file == "7":
+                    self.label_name.append(7)
+                elif input_file == "8":
+                    self.label_name.append(8)
+                elif input_file == "9":
+                    self.label_name.append(9)
+                elif input_file == "10":
+                    self.label_name.append(10)
+                elif input_file == "11":
+                    self.label_name.append(11)
+                elif input_file == "12":
+                    self.label_name.append(12)
+                elif input_file == "13":
+                    self.label_name.append(13)
+                elif input_file == "14":
+                    self.label_name.append(14)
+                elif input_file == "15":
+                    self.label_name.append(15)
+                elif input_file == "16":
+                    self.label_name.append(16)
+                elif input_file == "17":
+                    self.label_name.append(17)
+                elif input_file == "18":
+                    self.label_name.append(18)
+                elif input_file == "19":
+                    self.label_name.append(19)
+                elif input_file == "20":
+                    self.label_name.append(20)
+                elif input_file == "21":
+                    self.label_name.append(21)
+                elif input_file == "22":
+                    self.label_name.append(22)
+                elif input_file == "23":
+                    self.label_name.append(23)
+                elif input_file == "24":
+                    self.label_name.append(24)
+                elif input_file == "25":
+                    self.label_name.append(25)
+                elif input_file == "26":
+                    self.label_name.append(26)
+                elif input_file == "27":
+                    self.label_name.append(27)
+                elif input_file == "28":
+                    self.label_name.append(28)
+                elif input_file == "29":
+                    self.label_name.append(29)
+                elif input_file == "30":
+                    self.label_name.append(30)
+                elif input_file == "31":
+                    self.label_name.append(31)
+                elif input_file == "32":
+                    self.label_name.append(32)
+                elif input_file == "33":
+                    self.label_name.append(33)
+                elif input_file == "34":
+                    self.label_name.append(34)
+                elif input_file == "35":
+                    self.label_name.append(35)
+                elif input_file == "36":
+                    self.label_name.append(36)
+                elif input_file == "37":
+                    self.label_name.append(37)
+                elif input_file == "38":
+                    self.label_name.append(38)
+                elif input_file == "39":
+                    self.label_name.append(39)
+                elif input_file == "40":
+                    self.label_name.append(40)
+                elif input_file == "41":
+                    self.label_name.append(41)
+                elif input_file == "42":
+                    self.label_name.append(42)
+                else:
+                    print("error")
             else:
-                print("error")
+
+                if input_file == "One Way Right":
+                    self.label_name.append(0)
+                elif input_file == "Slow Xing":
+                    self.label_name.append(1)
+                elif input_file == "Yield":
+                    self.label_name.append(2)
+                elif input_file == "One Way Left":
+                    self.label_name.append(3)
+                elif input_file == "Traffic Light Sign":
+                    self.label_name.append(4)
+                elif input_file == "Stop":
+                    self.label_name.append(5)
+                elif input_file == "Ducky":
+                    self.label_name.append(6)
+                else:
+                    print("error")
+
 
 
 
     # Split training data and testing Data and makes it random and normalized it
     def splitting_data_normalize(self):
-        self.X_train, self.X_test, self.Y_train_vec, self.Y_test_vec = train_test_split(self.image_file, self.label_name, test_size = 0.15, random_state = 42)
+        self.X_train, self.X_test, self.Y_train_vec, self.Y_test_vec = train_test_split(self.image_file, self.label_name, test_size = 0.10, random_state = 42)
 
         self.input_shape = self.X_train.shape[1:]
         
