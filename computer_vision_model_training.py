@@ -63,14 +63,14 @@ class computer_vision_training(object):
         start = "ending --: " 
         self.get_training_time(start)
         
-        self.model.save_weights("models/" + self.image_type + "_" + self.name + "_" + self.model_type + "_computer_vision_categories_"+ str(self.number_classes)+"_model.h5")
+        self.model.save_weights("models/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + "_computer_vision_categories_"+ str(self.number_classes)+"_model.h5")
    
 
     # Evaluate model
     def evaluate_model(self):
         evaluation = self.model.evaluate(self.X_test, self.Y_test, verbose=1)
 
-        with open("graph_charts/" + self.image_type + "_" + self.name + "_" + self.model_type + "_evaluate_computer_vision_category_" + str(self.number_classes) + ".txt", 'w') as write:
+        with open("graph_charts/" + self.image_type + "_" + self.name + "_" + self.category + "_" + self.model_type + "_evaluate_computer_vision_category_" + str(self.number_classes) + ".txt", 'w') as write:
             write.writelines("Loss: " + str(evaluation[0]) + "\n")
             write.writelines("Accuracy: " + str(evaluation[1]))
         
@@ -82,14 +82,14 @@ class computer_vision_training(object):
     # PLotting model
     def plot_model(self):
 
-        # Brain cancer modeling
+        # Computer Vision modeling
         plt.plot(self.computer_vision_model.history['accuracy'])
         plt.plot(self.computer_vision_model.history['val_accuracy'])
         plt.title('model accuracy')
         plt.ylabel('accuracy')
         plt.xlabel('epoch')
         plt.legend(['train', 'Validation'], loc='upper left')
-        plt.savefig("graph_charts/" + self.image_type + "_" + self.name + "_" + self.model_type + '_accuracy_' + str(self.number_classes) + '.png', dpi =500)
+        plt.savefig("graph_charts/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + '_accuracy_' + str(self.number_classes) + '.png', dpi =500)
 
 
         plt.plot(self.computer_vision_model.history['loss'])
@@ -98,7 +98,7 @@ class computer_vision_training(object):
         plt.ylabel('loss')
         plt.xlabel('epoch')
         plt.legend(['train', 'Validation'], loc='upper left')
-        plt.savefig("graph_charts/" + self.image_type + "_" + self.name + "_" + self.model_type + '_lost_' + str(self.number_classes) +'.png', dpi =500)
+        plt.savefig("graph_charts/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + '_lost_' + str(self.number_classes) +'.png', dpi =500)
 
 
 
@@ -107,13 +107,13 @@ class computer_vision_training(object):
         plt.figure( dpi=256)
         predicted_classes = self.model.predict_classes(self.X_test)
 
-        for i in range(14):
+        for i in range(25):
             plt.subplot(5,5,i+1)
             fig=plt.imshow(self.X_test[i,:,:,:])
             plt.axis('off')
             plt.title("Predicted - {}".format(self.model_categories[predicted_classes[i]] ) + "\n Actual - {}".format(self.model_categories[self.Y_test_vec[i,0]] ),fontsize=3)
             plt.tight_layout()
-            plt.savefig("graph_charts/" + self.image_type + "_" + self.name + "_" + self.model_type + '_prediction' + str(self.number_classes) + '.png', dpi =500)
+            plt.savefig("graph_charts/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + '_prediction' + str(self.number_classes) + '.png', dpi =500)
 
 
 
@@ -123,7 +123,7 @@ class computer_vision_training(object):
         date_and_time = datetime.datetime.now()
         test_date_and_time = "/test_on_date_" + str(date_and_time.month) + "_" + str(date_and_time.day) + "_" + str(date_and_time.year) + "_time_at_" + date_and_time.strftime("%H:%M:%S")
 
-        with open("graph_charts/" + self.image_type + "_" + self.name + "_" + self.model_type + "_evaluate_training_time_" + str(self.number_classes) + ".txt", 'a') as write:
+        with open("graph_charts/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + "_evaluate_training_time_" + str(self.number_classes) + ".txt", 'a') as write:
             write.writelines(start + test_date_and_time + "\n")
 
 
