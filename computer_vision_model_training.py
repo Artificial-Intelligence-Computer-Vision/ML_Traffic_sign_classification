@@ -107,8 +107,8 @@ class computer_vision_training(object):
         plt.figure( dpi=256)
         predicted_classes = self.model.predict_classes(self.X_test)
 
-        for i in range(25):
-            plt.subplot(5,5,i+1)
+        for i in range(100):
+            plt.subplot(10,10,i+1)
             fig=plt.imshow(self.X_test[i,:,:,:])
             plt.axis('off')
             plt.title("Predicted - {}".format(self.model_categories[predicted_classes[i]] ) + "\n Actual - {}".format(self.model_categories[self.Y_test_vec[i,0]] ),fontsize=3)

@@ -14,7 +14,7 @@ class computer_vision_building(object):
         self.image_size = 240
         self.path  = "traffic_signs/"
         self.image_type = image_type
-
+        self.category = category
 
         # Determine
         if self.image_type == "small_traffic_sign":
@@ -132,11 +132,6 @@ class computer_vision_building(object):
             			"End of no passing by vehicles over 3.5 metric tons"]
 	
 	
-        self.category = category
-	
-        if  self.category == "normal":
-            self.true_path = self.path + "Small_Traffic_Sign/"
-
 
         if self.category == "category_1":
             self.category_names = self.category_names_1
@@ -146,8 +141,7 @@ class computer_vision_building(object):
             self.category_names = self.category_names_3
         elif self.category == "normal":
             self.category_names = self.categories
-
-        else:
+        elif self.category == "regular":
             self.category_names = self.category_names
 	
 	
@@ -167,7 +161,7 @@ class computer_vision_building(object):
         self.create_model_type = model_type
         
         if self.category == "category_1":
-	        # Check validity
+	    # Check validity
             self.check_valid(self.advanced_categories_1[0])
             self.check_valid(self.advanced_categories_1[1])
             self.check_valid(self.advanced_categories_1[2])
@@ -185,7 +179,7 @@ class computer_vision_building(object):
             self.check_valid(self.advanced_categories_1[14])
         	
         elif self.category == "category_2":
-	        # Check validity
+	    # Check validity
             self.check_valid(self.advanced_categories_2[0])
             self.check_valid(self.advanced_categories_2[1])
             self.check_valid(self.advanced_categories_2[2])
@@ -202,7 +196,7 @@ class computer_vision_building(object):
             self.check_valid(self.advanced_categories_2[13])
 
         elif self.category == "category_3":
-	        # Check validity
+	    # Check validity
             self.check_valid(self.advanced_categories_3[0])
             self.check_valid(self.advanced_categories_3[1])
             self.check_valid(self.advanced_categories_3[2])
@@ -217,6 +211,52 @@ class computer_vision_building(object):
             self.check_valid(self.advanced_categories_3[11])
             self.check_valid(self.advanced_categories_3[12])
             self.check_valid(self.advanced_categories_3[13])
+
+        elif self.category == "regular":
+            # Check validity
+            self.check_valid(self.advanced_categories[0])
+            self.check_valid(self.advanced_categories[1])
+            self.check_valid(self.advanced_categories[2])
+            self.check_valid(self.advanced_categories[3])
+            self.check_valid(self.advanced_categories[4])
+            self.check_valid(self.advanced_categories[5])
+            self.check_valid(self.advanced_categories[6])
+            self.check_valid(self.advanced_categories[7])
+            self.check_valid(self.advanced_categories[8])
+            self.check_valid(self.advanced_categories[9])
+            self.check_valid(self.advanced_categories[10])
+            self.check_valid(self.advanced_categories[11])
+            self.check_valid(self.advanced_categories[12])
+            self.check_valid(self.advanced_categories[13])
+            self.check_valid(self.advanced_categories[14])
+            self.check_valid(self.advanced_categories[15])
+            self.check_valid(self.advanced_categories[16])
+            self.check_valid(self.advanced_categories[17])
+            self.check_valid(self.advanced_categories[18])
+            self.check_valid(self.advanced_categories[19])
+            self.check_valid(self.advanced_categories[20])
+            self.check_valid(self.advanced_categories[21])
+            self.check_valid(self.advanced_categories[22])
+            self.check_valid(self.advanced_categories[23])
+            self.check_valid(self.advanced_categories[24])
+            self.check_valid(self.advanced_categories[25])
+            self.check_valid(self.advanced_categories[26])
+            self.check_valid(self.advanced_categories[27])
+            self.check_valid(self.advanced_categories[28])
+            self.check_valid(self.advanced_categories[29])
+            self.check_valid(self.advanced_categories[30])
+            self.check_valid(self.advanced_categories[31])
+            self.check_valid(self.advanced_categories[32])
+            self.check_valid(self.advanced_categories[33])
+            self.check_valid(self.advanced_categories[34])
+            self.check_valid(self.advanced_categories[35])
+            self.check_valid(self.advanced_categories[36])
+            self.check_valid(self.advanced_categories[37])
+            self.check_valid(self.advanced_categories[38])
+            self.check_valid(self.advanced_categories[39])
+            self.check_valid(self.advanced_categories[40])
+            self.check_valid(self.advanced_categories[41])
+            self.check_valid(self.advanced_categories[42])
 
         elif self.category == "normal":
             # Check validity
@@ -233,7 +273,7 @@ class computer_vision_building(object):
 
 
         if self.category == "category_1":
-	        # Resize image
+	    # Resize image
             self.resize_image_and_label_image(self.advanced_categories_1[0])
             self.resize_image_and_label_image(self.advanced_categories_1[1])
             self.resize_image_and_label_image(self.advanced_categories_1[2])
@@ -251,7 +291,7 @@ class computer_vision_building(object):
             self.resize_image_and_label_image(self.advanced_categories_1[14])
         	
         elif self.category == "category_2":
-	        # Resize image
+	    # Resize image
             self.resize_image_and_label_image(self.advanced_categories_2[0])
             self.resize_image_and_label_image(self.advanced_categories_2[1])
             self.resize_image_and_label_image(self.advanced_categories_2[2])
@@ -268,7 +308,7 @@ class computer_vision_building(object):
             self.resize_image_and_label_image(self.advanced_categories_2[13])
 
         elif self.category == "category_3":
-	        # Resize image
+	    # Resize image
             self.resize_image_and_label_image(self.advanced_categories_3[0])
             self.resize_image_and_label_image(self.advanced_categories_3[1])
             self.resize_image_and_label_image(self.advanced_categories_3[2])
@@ -283,7 +323,53 @@ class computer_vision_building(object):
             self.resize_image_and_label_image(self.advanced_categories_3[11])
             self.resize_image_and_label_image(self.advanced_categories_3[12])
             self.resize_image_and_label_image(self.advanced_categories_3[13])
-        	
+        
+        elif self.category == "regular":
+            # Resize image
+            self.resize_image_and_label_image(self.advanced_categories[0])
+            self.resize_image_and_label_image(self.advanced_categories[1])
+            self.resize_image_and_label_image(self.advanced_categories[2])
+            self.resize_image_and_label_image(self.advanced_categories[3])
+            self.resize_image_and_label_image(self.advanced_categories[4])
+            self.resize_image_and_label_image(self.advanced_categories[5])
+            self.resize_image_and_label_image(self.advanced_categories[6])
+            self.resize_image_and_label_image(self.advanced_categories[7])
+            self.resize_image_and_label_image(self.advanced_categories[8])
+            self.resize_image_and_label_image(self.advanced_categories[9])
+            self.resize_image_and_label_image(self.advanced_categories[10])
+            self.resize_image_and_label_image(self.advanced_categories[11])
+            self.resize_image_and_label_image(self.advanced_categories[12])
+            self.resize_image_and_label_image(self.advanced_categories[13])
+            self.resize_image_and_label_image(self.advanced_categories[14])
+            self.resize_image_and_label_image(self.advanced_categories[15])
+            self.resize_image_and_label_image(self.advanced_categories[16])
+            self.resize_image_and_label_image(self.advanced_categories[17])
+            self.resize_image_and_label_image(self.advanced_categories[18])
+            self.resize_image_and_label_image(self.advanced_categories[19])
+            self.resize_image_and_label_image(self.advanced_categories[20])
+            self.resize_image_and_label_image(self.advanced_categories[21])
+            self.resize_image_and_label_image(self.advanced_categories[22])
+            self.resize_image_and_label_image(self.advanced_categories[23])
+            self.resize_image_and_label_image(self.advanced_categories[24])
+            self.resize_image_and_label_image(self.advanced_categories[25])
+            self.resize_image_and_label_image(self.advanced_categories[26])
+            self.resize_image_and_label_image(self.advanced_categories[27])
+            self.resize_image_and_label_image(self.advanced_categories[28])
+            self.resize_image_and_label_image(self.advanced_categories[29])
+            self.resize_image_and_label_image(self.advanced_categories[30])
+            self.resize_image_and_label_image(self.advanced_categories[31])
+            self.resize_image_and_label_image(self.advanced_categories[32])
+            self.resize_image_and_label_image(self.advanced_categories[33])
+            self.resize_image_and_label_image(self.advanced_categories[34])
+            self.resize_image_and_label_image(self.advanced_categories[35])
+            self.resize_image_and_label_image(self.advanced_categories[36])
+            self.resize_image_and_label_image(self.advanced_categories[37])
+            self.resize_image_and_label_image(self.advanced_categories[38])
+            self.resize_image_and_label_image(self.advanced_categories[39])
+            self.resize_image_and_label_image(self.advanced_categories[40])
+            self.resize_image_and_label_image(self.advanced_categories[41])
+            self.resize_image_and_label_image(self.advanced_categories[42])
+
         elif self.category == "normal":
             # Resize image
             self.resize_image_and_label_image(self.categories[0])
