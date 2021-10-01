@@ -17,8 +17,17 @@ class computer_vision_building(object):
 
 
         # Determine
-        if self.image_type == "normal":
+        if self.image_type == "small_traffic_sign":
+            self.true_path = self.path + "Small_Traffic_Sign/"
+        elif self.image_type == "regular":
             self.true_path = self.path + "Train/"
+        elif self.image_type == "train1":
+            self.true_path = self.path + "Train_1_50/"
+        elif self.image_type == "train2":
+            self.true_path = self.path + "Train_2_25/"
+        elif self.image_type == "train3":
+            self.true_path = self.path + "Train_3_25/"
+
         
         self.valid_images = [".jpg",".png"]
         self.input_shape = None
