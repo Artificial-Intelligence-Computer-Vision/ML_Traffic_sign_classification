@@ -111,7 +111,7 @@ class computer_vision_training(object):
             plt.subplot(10,10,i+1)
             fig=plt.imshow(self.X_test[i,:,:,:])
             plt.axis('off')
-            plt.title("Predicted - {}".format(self.model_categories[predicted_classes[i]] ) + "\n Actual - {}".format(self.model_categories[self.Y_test_vec[i,0]] ),fontsize=3)
+            plt.title("Predicted - {}".format(self.model_categories[predicted_classes[i]] ) + "\n Actual - {}".format(self.model_categories[self.Y_test_vec[i,0]] ),fontsize=1)
             plt.tight_layout()
             plt.savefig("graph_charts/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + '_prediction' + str(self.number_classes) + '.png', dpi =500)
 

@@ -15,5 +15,5 @@ if __name__ == "__main__":
             computer_vision_analysis_obj = computer_vision_training(model_type = sys.argv[2], image_type = sys.argv[3], category = sys.argv[4])
 
         # Localization and Detection 
-        if sys.arg[1] == "Localization and Detection":
+        if sys.argv[1] == "localization_and_detection":
             pass
