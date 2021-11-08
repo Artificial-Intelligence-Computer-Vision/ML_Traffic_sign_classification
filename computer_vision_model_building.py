@@ -660,7 +660,38 @@ class computer_vision_building(object):
         return self.category_names
 
 
+    def create_models_1(self):
 
+        self.model = Sequential()
+
+        # First Hitten Layer with 64, 7, 7
+        self.model.add(Conv2D(64,(7,7), strides = (1,1), padding="same", input_shape = self.input_shape, activation = "relu"))
+        self.model.add(Activation("relu"))
+        self.model.add(MaxPooling2D(pool_size = (4,4)))
+        self.model.add(Dropout(0.25))
+    
+        # Second Hitten Layer 32, 7, 7
+        self.model.add(Conv2D(32,(7,7), strides = (1,1), padding="same", activation = "relu"))
+        self.model.add(Activation("relu"))
+        self.model.add(MaxPooling2D(pool_size = (2,2)))
+        self.model.add(Dropout(0.25))
+    
+        # Third Hitten Layer 32, 7, 7
+        self.model.add(Conv2D(16,(7,7), strides = (1,1), padding="same", activation = "relu"))
+        self.model.add(Activation("relu"))
+        self.model.add(MaxPooling2D(pool_size = (1,1)))
+        self.model.add(Dropout(0.25))
+    
+        # last layer, output Layer
+        self.model.add(Flatten())
+        self.model.add(Dense(units = self.number_classes, activation = "softmax", input_dim=2))
+
+        self.model.compile(loss = "binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+        return self.model
+
+
+    
     def create_models_2(self):
 
         self.model = Sequential()
@@ -709,17 +740,19 @@ class computer_vision_building(object):
     def MyConv(self, first = False):
 
         if first == False:
-            self.model.add(Conv2D(filters=64, kernel_size=(4, 4),strides = (1,1), padding="same", input_shape = self.input_shape, activation="relu"))
+            self.model.add(Conv2D(64, (4, 4),strides = (1,1), padding="same",
+                input_shape = self.input_shape))
         else:
-            self.model.add(Conv2D(64,(4, 4),strides = (1,1), padding="same", input_shape = self.input_shape, activation="relu"))
+            self.model.add(Conv2D(64, (4, 4),strides = (1,1), padding="same",
+                 input_shape = self.input_shape))
     
+        self.model.add(Activation("relu"))
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
         self.model.add(Dropout(0.5))
 
-        self.model.add(Conv2D(filters=32, kernel_size = (4, 4),strides = (1,1),padding="same"))
+        self.model.add(Conv2D(32, (4, 4),strides = (1,1),padding="same"))
         self.model.add(Activation("relu"))
         self.model.add(Dropout(0.25))
-
 
 
 
