@@ -1,5 +1,4 @@
 from header_imports import *
-from computer_vision_model_training import *
 
 if __name__ == "__main__":
     
@@ -21,3 +20,9 @@ if __name__ == "__main__":
         # Localization and Detection 
         if sys.argv[1] == "localization_and_detection":
             pass
+
+        # Transfer Learning 
+        if sys.argv[1] == "transfer_learning":
+            pass
+
+

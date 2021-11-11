@@ -665,20 +665,17 @@ class computer_vision_building(object):
         self.model = Sequential()
 
         # First Hitten Layer with 64, 7, 7
-        self.model.add(Conv2D(64,(7,7), strides = (1,1), padding="same", input_shape = self.input_shape, activation = "relu"))
-        self.model.add(Activation("relu"))
+        self.model.add(Conv2D(filters=64,kernel_size=(7,7), strides = (1,1), padding="same", input_shape = self.input_shape, activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (4,4)))
         self.model.add(Dropout(0.25))
     
         # Second Hitten Layer 32, 7, 7
-        self.model.add(Conv2D(32,(7,7), strides = (1,1), padding="same", activation = "relu"))
-        self.model.add(Activation("relu"))
+        self.model.add(Conv2D(filters=32,kernel_size=(7,7), strides = (1,1), padding="same", activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (2,2)))
         self.model.add(Dropout(0.25))
     
         # Third Hitten Layer 32, 7, 7
-        self.model.add(Conv2D(16,(7,7), strides = (1,1), padding="same", activation = "relu"))
-        self.model.add(Activation("relu"))
+        self.model.add(Conv2D(filters=16,(7,7), strides = (1,1), padding="same", activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (1,1)))
         self.model.add(Dropout(0.25))
     

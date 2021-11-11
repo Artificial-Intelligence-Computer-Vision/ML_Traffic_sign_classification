@@ -1,26 +1,16 @@
 from header_imports import *
-from computer_vision_model_building import *
 
-class computer_vision_training(object):
+class computer_vision_training(computer_vision_building):
     def __init__(self, model_type, image_type, category):
+        super.__init__(model_type, image_type, category)
         
         self.number_classes = 43
         self.model_type = str(model_type)
         self.image_type = str(image_type)
         self.category = str(category)
         
-        # Category 1
-        computer_vision_building_obj = computer_vision_building(model_type = self.model_type, image_type = self.image_type, category = self.category)
-        self.model = computer_vision_building_obj.get_model()
-        
-        xy_data = computer_vision_building_obj.get_data()
+        self.number_images_to_plot = 100
 
-        self.X_train = xy_data[0]
-        self.Y_train = xy_data[1]
-        self.X_test = xy_data[2]
-        self.Y_test = xy_data[3]
-        self.Y_test_vec = xy_data[4]
-        
         self.batch_size = [10, 20, 40, 60, 80, 100]
         self.epochs = [1, 5, 15, 50, 100, 200]
         self.param_grid = dict(batch_size = self.batch_size, epochs = self.epochs)
@@ -30,9 +20,6 @@ class computer_vision_training(object):
         self.learining_rate_reduction = ReduceLROnPlateau(monitor='val_accuracy',patience=2,verbose=1,factor= 0.5,min_lr=0.00001)
         
         self.callbacks_2 = self.earlyStop, self.learining_rate_reduction
-        
-        # Model
-        self.model_categories = computer_vision_building_obj.get_categories()
         
         # Train
         self.name = "category_1"
@@ -107,7 +94,7 @@ class computer_vision_training(object):
         plt.figure( dpi=256)
         predicted_classes = self.model.predict_classes(self.X_test)
 
-        for i in range(100):
+        for i in range(self.number_images_to_plot):
             plt.subplot(10,10,i+1)
             fig=plt.imshow(self.X_test[i,:,:,:])
             plt.axis('off')
