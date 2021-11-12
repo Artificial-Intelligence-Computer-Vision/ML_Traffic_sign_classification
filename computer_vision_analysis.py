@@ -19,7 +19,8 @@ if __name__ == "__main__":
 
         # Localization and Detection 
         if sys.argv[1] == "localization_and_detection":
-            pass
+            computer_vision_analysis_obj = computer_vision_localization_detection()
+
 
         # Transfer Learning 
         if sys.argv[1] == "transfer_learning":

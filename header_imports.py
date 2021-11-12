@@ -17,6 +17,7 @@ from os import listdir
 from xml.etree import ElementTree
 from matplotlib import pyplot
 from matplotlib.patches import Rectangle
+import coco
 
 from sklearn.tree import DecisionTreeRegressor
 from pandas.plotting import scatter_matrix
@@ -33,7 +34,8 @@ from sklearn.ensemble import RandomForestClassifier
 import keras
 
 from mrcnn.config import Config
-from mrcnn.model import MaskRCNN, mold_image, modellib, log
+import mrcnn.model as modellib
+from mrcnn.model import MaskRCNN, mold_image, log
 from mrcnn.utils import Dataset
 from mrcnn import utils, visualize
 
@@ -54,6 +56,5 @@ plt.style.use('ggplot')
 
 from computer_vision_model_building import *
 from computer_vision_model_training import *
+from computer_vision_model_transfer_learning import *
 from computer_vision_model_detection import *
-from computer_vision_transfer_learning import *
-

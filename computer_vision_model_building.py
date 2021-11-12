@@ -11,7 +11,7 @@ class computer_vision_building(object):
         # 0 for False and 1 for True for label name
         self.label_name = []
         self.number_classes = 43
-        self.image_size = 240
+        self.image_size = 256
         self.path  = "traffic_signs/"
         self.image_type = image_type
         self.category = category
@@ -161,226 +161,55 @@ class computer_vision_building(object):
         self.create_model_type = model_type
         
         if self.category == "category_1":
-	    # Check validity
-            self.check_valid(self.advanced_categories_1[0])
-            self.check_valid(self.advanced_categories_1[1])
-            self.check_valid(self.advanced_categories_1[2])
-            self.check_valid(self.advanced_categories_1[3])
-            self.check_valid(self.advanced_categories_1[4])
-            self.check_valid(self.advanced_categories_1[5])
-            self.check_valid(self.advanced_categories_1[6])
-            self.check_valid(self.advanced_categories_1[7])
-            self.check_valid(self.advanced_categories_1[8])
-            self.check_valid(self.advanced_categories_1[9])
-            self.check_valid(self.advanced_categories_1[10])
-            self.check_valid(self.advanced_categories_1[11])
-            self.check_valid(self.advanced_categories_1[12])
-            self.check_valid(self.advanced_categories_1[13])
-            self.check_valid(self.advanced_categories_1[14])
-        	
+	        # Check validity
+            for i in range(0, 15):
+                self.check_valid(self.advanced_categories_1[i])
+
         elif self.category == "category_2":
-	    # Check validity
-            self.check_valid(self.advanced_categories_2[0])
-            self.check_valid(self.advanced_categories_2[1])
-            self.check_valid(self.advanced_categories_2[2])
-            self.check_valid(self.advanced_categories_2[3])
-            self.check_valid(self.advanced_categories_2[4])
-            self.check_valid(self.advanced_categories_2[5])
-            self.check_valid(self.advanced_categories_2[6])
-            self.check_valid(self.advanced_categories_2[7])
-            self.check_valid(self.advanced_categories_2[8])
-            self.check_valid(self.advanced_categories_2[9])
-            self.check_valid(self.advanced_categories_2[10])
-            self.check_valid(self.advanced_categories_2[11])
-            self.check_valid(self.advanced_categories_2[12])
-            self.check_valid(self.advanced_categories_2[13])
+	        # Check validity
+            for i in range(0, 14):
+                self.check_valid(self.advanced_categories_1[i])
 
         elif self.category == "category_3":
-	    # Check validity
-            self.check_valid(self.advanced_categories_3[0])
-            self.check_valid(self.advanced_categories_3[1])
-            self.check_valid(self.advanced_categories_3[2])
-            self.check_valid(self.advanced_categories_3[3])
-            self.check_valid(self.advanced_categories_3[4])
-            self.check_valid(self.advanced_categories_3[5])
-            self.check_valid(self.advanced_categories_3[6])
-            self.check_valid(self.advanced_categories_3[7])
-            self.check_valid(self.advanced_categories_3[8])
-            self.check_valid(self.advanced_categories_3[9])
-            self.check_valid(self.advanced_categories_3[10])
-            self.check_valid(self.advanced_categories_3[11])
-            self.check_valid(self.advanced_categories_3[12])
-            self.check_valid(self.advanced_categories_3[13])
+	        # Check validity
+            for i in range(0, 14):
+                self.check_valid(self.advanced_categories_1[i])
 
         elif self.category == "regular":
             # Check validity
-            self.check_valid(self.advanced_categories[0])
-            self.check_valid(self.advanced_categories[1])
-            self.check_valid(self.advanced_categories[2])
-            self.check_valid(self.advanced_categories[3])
-            self.check_valid(self.advanced_categories[4])
-            self.check_valid(self.advanced_categories[5])
-            self.check_valid(self.advanced_categories[6])
-            self.check_valid(self.advanced_categories[7])
-            self.check_valid(self.advanced_categories[8])
-            self.check_valid(self.advanced_categories[9])
-            self.check_valid(self.advanced_categories[10])
-            self.check_valid(self.advanced_categories[11])
-            self.check_valid(self.advanced_categories[12])
-            self.check_valid(self.advanced_categories[13])
-            self.check_valid(self.advanced_categories[14])
-            self.check_valid(self.advanced_categories[15])
-            self.check_valid(self.advanced_categories[16])
-            self.check_valid(self.advanced_categories[17])
-            self.check_valid(self.advanced_categories[18])
-            self.check_valid(self.advanced_categories[19])
-            self.check_valid(self.advanced_categories[20])
-            self.check_valid(self.advanced_categories[21])
-            self.check_valid(self.advanced_categories[22])
-            self.check_valid(self.advanced_categories[23])
-            self.check_valid(self.advanced_categories[24])
-            self.check_valid(self.advanced_categories[25])
-            self.check_valid(self.advanced_categories[26])
-            self.check_valid(self.advanced_categories[27])
-            self.check_valid(self.advanced_categories[28])
-            self.check_valid(self.advanced_categories[29])
-            self.check_valid(self.advanced_categories[30])
-            self.check_valid(self.advanced_categories[31])
-            self.check_valid(self.advanced_categories[32])
-            self.check_valid(self.advanced_categories[33])
-            self.check_valid(self.advanced_categories[34])
-            self.check_valid(self.advanced_categories[35])
-            self.check_valid(self.advanced_categories[36])
-            self.check_valid(self.advanced_categories[37])
-            self.check_valid(self.advanced_categories[38])
-            self.check_valid(self.advanced_categories[39])
-            self.check_valid(self.advanced_categories[40])
-            self.check_valid(self.advanced_categories[41])
-            self.check_valid(self.advanced_categories[42])
+            for i in range(0, 43):
+                self.check_valid(self.advanced_categories_1[i])
 
         elif self.category == "normal":
             # Check validity
-            self.check_valid(self.categories[0])
-            self.check_valid(self.categories[1])
-            self.check_valid(self.categories[2])
-            self.check_valid(self.categories[3])
-            self.check_valid(self.categories[4])
-            self.check_valid(self.categories[5])
-            self.check_valid(self.categories[6])
-
-		
-
+            for i in range(0, 7):
+                self.check_valid(self.categories[i])
 
 
         if self.category == "category_1":
-	    # Resize image
-            self.resize_image_and_label_image(self.advanced_categories_1[0])
-            self.resize_image_and_label_image(self.advanced_categories_1[1])
-            self.resize_image_and_label_image(self.advanced_categories_1[2])
-            self.resize_image_and_label_image(self.advanced_categories_1[3])
-            self.resize_image_and_label_image(self.advanced_categories_1[4])
-            self.resize_image_and_label_image(self.advanced_categories_1[5])
-            self.resize_image_and_label_image(self.advanced_categories_1[6])
-            self.resize_image_and_label_image(self.advanced_categories_1[7])
-            self.resize_image_and_label_image(self.advanced_categories_1[8])
-            self.resize_image_and_label_image(self.advanced_categories_1[9])
-            self.resize_image_and_label_image(self.advanced_categories_1[10])
-            self.resize_image_and_label_image(self.advanced_categories_1[11])
-            self.resize_image_and_label_image(self.advanced_categories_1[12])
-            self.resize_image_and_label_image(self.advanced_categories_1[13])
-            self.resize_image_and_label_image(self.advanced_categories_1[14])
-        	
+	        # Resize image
+            for i in range(0,15):
+                self.resize_image_and_label_image(self.advanced_categories_1[i])
+                   	
         elif self.category == "category_2":
-	    # Resize image
-            self.resize_image_and_label_image(self.advanced_categories_2[0])
-            self.resize_image_and_label_image(self.advanced_categories_2[1])
-            self.resize_image_and_label_image(self.advanced_categories_2[2])
-            self.resize_image_and_label_image(self.advanced_categories_2[3])
-            self.resize_image_and_label_image(self.advanced_categories_2[4])
-            self.resize_image_and_label_image(self.advanced_categories_2[5])
-            self.resize_image_and_label_image(self.advanced_categories_2[6])
-            self.resize_image_and_label_image(self.advanced_categories_2[7])
-            self.resize_image_and_label_image(self.advanced_categories_2[8])
-            self.resize_image_and_label_image(self.advanced_categories_2[9])
-            self.resize_image_and_label_image(self.advanced_categories_2[10])
-            self.resize_image_and_label_image(self.advanced_categories_2[11])
-            self.resize_image_and_label_image(self.advanced_categories_2[12])
-            self.resize_image_and_label_image(self.advanced_categories_2[13])
-
+	        # Resize image
+            for i in range(0,14):
+                self.resize_image_and_label_image(self.advanced_categories_1[i])
+           
         elif self.category == "category_3":
-	    # Resize image
-            self.resize_image_and_label_image(self.advanced_categories_3[0])
-            self.resize_image_and_label_image(self.advanced_categories_3[1])
-            self.resize_image_and_label_image(self.advanced_categories_3[2])
-            self.resize_image_and_label_image(self.advanced_categories_3[3])
-            self.resize_image_and_label_image(self.advanced_categories_3[4])
-            self.resize_image_and_label_image(self.advanced_categories_3[5])
-            self.resize_image_and_label_image(self.advanced_categories_3[6])
-            self.resize_image_and_label_image(self.advanced_categories_3[7])
-            self.resize_image_and_label_image(self.advanced_categories_3[8])
-            self.resize_image_and_label_image(self.advanced_categories_3[9])
-            self.resize_image_and_label_image(self.advanced_categories_3[10])
-            self.resize_image_and_label_image(self.advanced_categories_3[11])
-            self.resize_image_and_label_image(self.advanced_categories_3[12])
-            self.resize_image_and_label_image(self.advanced_categories_3[13])
-        
+	        # Resize image
+            for i in range(0,14):
+                self.resize_image_and_label_image(self.advanced_categories_1[i])
+                   
         elif self.category == "regular":
             # Resize image
-            self.resize_image_and_label_image(self.advanced_categories[0])
-            self.resize_image_and_label_image(self.advanced_categories[1])
-            self.resize_image_and_label_image(self.advanced_categories[2])
-            self.resize_image_and_label_image(self.advanced_categories[3])
-            self.resize_image_and_label_image(self.advanced_categories[4])
-            self.resize_image_and_label_image(self.advanced_categories[5])
-            self.resize_image_and_label_image(self.advanced_categories[6])
-            self.resize_image_and_label_image(self.advanced_categories[7])
-            self.resize_image_and_label_image(self.advanced_categories[8])
-            self.resize_image_and_label_image(self.advanced_categories[9])
-            self.resize_image_and_label_image(self.advanced_categories[10])
-            self.resize_image_and_label_image(self.advanced_categories[11])
-            self.resize_image_and_label_image(self.advanced_categories[12])
-            self.resize_image_and_label_image(self.advanced_categories[13])
-            self.resize_image_and_label_image(self.advanced_categories[14])
-            self.resize_image_and_label_image(self.advanced_categories[15])
-            self.resize_image_and_label_image(self.advanced_categories[16])
-            self.resize_image_and_label_image(self.advanced_categories[17])
-            self.resize_image_and_label_image(self.advanced_categories[18])
-            self.resize_image_and_label_image(self.advanced_categories[19])
-            self.resize_image_and_label_image(self.advanced_categories[20])
-            self.resize_image_and_label_image(self.advanced_categories[21])
-            self.resize_image_and_label_image(self.advanced_categories[22])
-            self.resize_image_and_label_image(self.advanced_categories[23])
-            self.resize_image_and_label_image(self.advanced_categories[24])
-            self.resize_image_and_label_image(self.advanced_categories[25])
-            self.resize_image_and_label_image(self.advanced_categories[26])
-            self.resize_image_and_label_image(self.advanced_categories[27])
-            self.resize_image_and_label_image(self.advanced_categories[28])
-            self.resize_image_and_label_image(self.advanced_categories[29])
-            self.resize_image_and_label_image(self.advanced_categories[30])
-            self.resize_image_and_label_image(self.advanced_categories[31])
-            self.resize_image_and_label_image(self.advanced_categories[32])
-            self.resize_image_and_label_image(self.advanced_categories[33])
-            self.resize_image_and_label_image(self.advanced_categories[34])
-            self.resize_image_and_label_image(self.advanced_categories[35])
-            self.resize_image_and_label_image(self.advanced_categories[36])
-            self.resize_image_and_label_image(self.advanced_categories[37])
-            self.resize_image_and_label_image(self.advanced_categories[38])
-            self.resize_image_and_label_image(self.advanced_categories[39])
-            self.resize_image_and_label_image(self.advanced_categories[40])
-            self.resize_image_and_label_image(self.advanced_categories[41])
-            self.resize_image_and_label_image(self.advanced_categories[42])
+            for i in range(0,43):
+                self.resize_image_and_label_image(self.advanced_categories_1[i])
 
         elif self.category == "normal":
             # Resize image
-            self.resize_image_and_label_image(self.categories[0])
-            self.resize_image_and_label_image(self.categories[1])
-            self.resize_image_and_label_image(self.categories[2])
-            self.resize_image_and_label_image(self.categories[3])
-            self.resize_image_and_label_image(self.categories[4])
-            self.resize_image_and_label_image(self.categories[5])
-            self.resize_image_and_label_image(self.categories[6])
-
-
+            for i in range(0,7):
+                self.resize_image_and_label_image(self.categories[i])
 
 
         # Numpy array
@@ -422,94 +251,11 @@ class computer_vision_building(object):
             
 
             if self.category == "regular":
-                if input_file == "0":
-                    self.label_name.append(0)
-                elif input_file == "1":
-                    self.label_name.append(1)
-                elif input_file == "2":
-                    self.label_name.append(2)
-                elif input_file == "3":
-                    self.label_name.append(3)
-                elif input_file == "4":
-                    self.label_name.append(4)
-                elif input_file == "5":
-                    self.label_name.append(5)
-                elif input_file == "6":
-                    self.label_name.append(6)
-                elif input_file == "7":
-                    self.label_name.append(7)
-                elif input_file == "8":
-                    self.label_name.append(8)
-                elif input_file == "9":
-                    self.label_name.append(9)
-                elif input_file == "10":
-                    self.label_name.append(10)
-                elif input_file == "11":
-                    self.label_name.append(11)
-                elif input_file == "12":
-                    self.label_name.append(12)
-                elif input_file == "13":
-                    self.label_name.append(13)
-                elif input_file == "14":
-                    self.label_name.append(14)
-                elif input_file == "15":
-                    self.label_name.append(15)
-                elif input_file == "16":
-                    self.label_name.append(16)
-                elif input_file == "17":
-                    self.label_name.append(17)
-                elif input_file == "18":
-                    self.label_name.append(18)
-                elif input_file == "19":
-                    self.label_name.append(19)
-                elif input_file == "20":
-                    self.label_name.append(20)
-                elif input_file == "21":
-                    self.label_name.append(21)
-                elif input_file == "22":
-                    self.label_name.append(22)
-                elif input_file == "23":
-                    self.label_name.append(23)
-                elif input_file == "24":
-                    self.label_name.append(24)
-                elif input_file == "25":
-                    self.label_name.append(25)
-                elif input_file == "26":
-                    self.label_name.append(26)
-                elif input_file == "27":
-                    self.label_name.append(27)
-                elif input_file == "28":
-                    self.label_name.append(28)
-                elif input_file == "29":
-                    self.label_name.append(29)
-                elif input_file == "30":
-                    self.label_name.append(30)
-                elif input_file == "31":
-                    self.label_name.append(31)
-                elif input_file == "32":
-                    self.label_name.append(32)
-                elif input_file == "33":
-                    self.label_name.append(33)
-                elif input_file == "34":
-                    self.label_name.append(34)
-                elif input_file == "35":
-                    self.label_name.append(35)
-                elif input_file == "36":
-                    self.label_name.append(36)
-                elif input_file == "37":
-                    self.label_name.append(37)
-                elif input_file == "38":
-                    self.label_name.append(38)
-                elif input_file == "39":
-                    self.label_name.append(39)
-                elif input_file == "40":
-                    self.label_name.append(40)
-                elif input_file == "41":
-                    self.label_name.append(41)
-                elif input_file == "42":
-                    self.label_name.append(42)
-                else:
-                    print("error")
+                for i in range(0, 43):
+                    if input_file == str(i):
+                        self.label_name.append(i)
+                    else:
+                        print("error")
             
             elif self.category == "normal":
                 if input_file == "One Way Right":
@@ -530,105 +276,25 @@ class computer_vision_building(object):
                     print("error")
 
             elif self.category == "category_1":
-                if input_file == "0":
-                    self.label_name.append(0)
-                elif input_file == "1":
-                    self.label_name.append(1)
-                elif input_file == "2":
-                    self.label_name.append(2)
-                elif input_file == "3":
-                    self.label_name.append(3)
-                elif input_file == "4":
-                    self.label_name.append(4)
-                elif input_file == "5":
-                    self.label_name.append(5)
-                elif input_file == "6":
-                    self.label_name.append(6)
-                elif input_file == "7":
-                    self.label_name.append(7)
-                elif input_file == "8":
-                    self.label_name.append(8)
-                elif input_file == "9":
-                    self.label_name.append(9)
-                elif input_file == "10":
-                    self.label_name.append(10)
-                elif input_file == "11":
-                    self.label_name.append(11)
-                elif input_file == "12":
-                    self.label_name.append(12)
-                elif input_file == "13":
-                    self.label_name.append(13)
-                elif input_file == "14":
-                    self.label_name.append(14)
-                else:
-                    print("error")
+                for i in range(0, 15):
+                    if input_file == str(i):
+                        self.label_name.append(i)
+                    else:
+                        print("error")
             
             elif self.category == "category_2":
-                if input_file == "15":
-                    self.label_name.append(0)
-                elif input_file == "16":
-                    self.label_name.append(1)
-                elif input_file == "17":
-                    self.label_name.append(2)
-                elif input_file == "18":
-                    self.label_name.append(3)
-                elif input_file == "19":
-                    self.label_name.append(4)
-                elif input_file == "20":
-                    self.label_name.append(5)
-                elif input_file == "21":
-                    self.label_name.append(6)
-                elif input_file == "22":
-                    self.label_name.append(7)
-                elif input_file == "23":
-                    self.label_name.append(8)
-                elif input_file == "24":
-                    self.label_name.append(9)
-                elif input_file == "25":
-                    self.label_name.append(10)
-                elif input_file == "26":
-                    self.label_name.append(11)
-                elif input_file == "27":
-                    self.label_name.append(12)
-                elif input_file == "28":
-                    self.label_name.append(13)
-                else:
-                    print("error")
-
+                for i in range(15, 29):
+                    if input_file == str(i):
+                        self.label_name.append(i)
+                    else:
+                        print("error")
+ 
             elif self.category == "category_3":
-                if input_file == "29":
-                    self.label_name.append(0)
-                elif input_file == "30":
-                    self.label_name.append(1)
-                elif input_file == "31":
-                    self.label_name.append(2)
-                elif input_file == "32":
-                    self.label_name.append(3)
-                elif input_file == "33":
-                    self.label_name.append(4)
-                elif input_file == "34":
-                    self.label_name.append(5)
-                elif input_file == "35":
-                    self.label_name.append(6)
-                elif input_file == "36":
-                    self.label_name.append(7)
-                elif input_file == "37":
-                    self.label_name.append(8)
-                elif input_file == "38":
-                    self.label_name.append(9)
-                elif input_file == "39":
-                    self.label_name.append(10)
-                elif input_file == "40":
-                    self.label_name.append(11)
-                elif input_file == "41":
-                    self.label_name.append(12)
-                elif input_file == "42":
-                    self.label_name.append(13)
-                else:
-                    print("error")
-
-
-
+                for i in range(29, 43):
+                    if input_file == str(i):
+                        self.label_name.append(i)
+                    else:
+                        print("error")
 
 
 
@@ -675,7 +341,7 @@ class computer_vision_building(object):
         self.model.add(Dropout(0.25))
     
         # Third Hitten Layer 32, 7, 7
-        self.model.add(Conv2D(filters=16,(7,7), strides = (1,1), padding="same", activation = "relu"))
+        self.model.add(Conv2D(filters=16,kernel_size=(7,7), strides = (1,1), padding="same", activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (1,1)))
         self.model.add(Dropout(0.25))
     
