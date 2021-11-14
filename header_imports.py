@@ -17,7 +17,6 @@ from os import listdir
 from xml.etree import ElementTree
 from matplotlib import pyplot
 from matplotlib.patches import Rectangle
-import coco
 
 from sklearn.tree import DecisionTreeRegressor
 from pandas.plotting import scatter_matrix
@@ -33,11 +32,8 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 import keras
 
-from mrcnn.config import Config
-import mrcnn.model as modellib
-from mrcnn.model import MaskRCNN, mold_image, log
-from mrcnn.utils import Dataset
-from mrcnn import utils, visualize
+from object_detection.builders import model_builder
+from object_detection.utils import config_util, label_map_util, visualization_utils as viz_utils
 
 from keras.datasets import cifar10
 import keras.backend as K
@@ -58,4 +54,5 @@ from computer_vision_model_building import *
 from computer_vision_model_training import *
 from computer_vision_model_transfer_learning import *
 from computer_vision_model_detection import *
+from computer_vision_model_classification import *
 from utilities import *

@@ -4,7 +4,6 @@ class computer_vision_building(object):
 
     def __init__(self, model_type, image_type, category):
 
-
         self.images = []
         self.filename = []
         self.image_file = []
@@ -78,17 +77,17 @@ class computer_vision_building(object):
         elif self.category == "category_2":
 	        # Check validity
             for i in range(0, 14):
-                self.check_valid(self.advanced_categories_1[i])
+                self.check_valid(self.advanced_categories_2[i])
 
         elif self.category == "category_3":
 	        # Check validity
             for i in range(0, 14):
-                self.check_valid(self.advanced_categories_1[i])
+                self.check_valid(self.advanced_categories_3[i])
 
         elif self.category == "regular":
             # Check validity
             for i in range(0, 43):
-                self.check_valid(self.advanced_categories_1[i])
+                self.check_valid(self.advanced_categories[i])
 
         elif self.category == "normal":
             # Check validity
@@ -104,17 +103,17 @@ class computer_vision_building(object):
         elif self.category == "category_2":
 	        # Resize image
             for i in range(0,14):
-                self.resize_image_and_label_image(self.advanced_categories_1[i])
+                self.resize_image_and_label_image(self.advanced_categories_2[i])
            
         elif self.category == "category_3":
 	        # Resize image
             for i in range(0,14):
-                self.resize_image_and_label_image(self.advanced_categories_1[i])
+                self.resize_image_and_label_image(self.advanced_categories_3[i])
                    
         elif self.category == "regular":
             # Resize image
             for i in range(0,43):
-                self.resize_image_and_label_image(self.advanced_categories_1[i])
+                self.resize_image_and_label_image(self.advanced_categories[i])
 
         elif self.category == "normal":
             # Resize image
@@ -223,17 +222,6 @@ class computer_vision_building(object):
         self.X_train /= 255
         self.X_test = self.X_test.astype("float32")
         self.X_test /= 255
-
-
-    def get_model(self):
-        return self.model
-
-    def get_data(self):
-        return self.X_train , self.Y_train, self.X_test, self.Y_test, self.Y_test_vec
-
-    def get_categories(self):
-        # Number of categories
-        return self.category_names
 
 
     def create_models_1(self):
