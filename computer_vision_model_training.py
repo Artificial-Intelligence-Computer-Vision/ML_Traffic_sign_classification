@@ -91,6 +91,7 @@ class computer_vision_training(computer_vision_building):
 
     def plot_random_examples(self):
 
+        plt.figure(dpi=256)
         predicted_classes = self.model.predict_classes(self.X_test)
 
         for i in range(self.number_images_to_plot):
@@ -99,7 +100,7 @@ class computer_vision_training(computer_vision_building):
             plt.axis('off')
             plt.title("Predicted - {}".format(self.model_categories[predicted_classes[i]] ) + "\n Actual - {}".format(self.model_categories[self.Y_test_vec[i,0]] ),fontsize=1)
             plt.tight_layout()
-            plt.savefig("graph_charts/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + '_prediction' + str(self.number_classes) + '.png', dpi = 500)
+            plt.savefig("graph_charts/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + '_prediction' + str(self.number_classes) + '.png')
 
 
 

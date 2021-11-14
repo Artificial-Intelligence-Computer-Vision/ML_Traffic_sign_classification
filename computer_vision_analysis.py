@@ -15,7 +15,8 @@ if __name__ == "__main__":
         
         # Indentify and image with model
         if sys.argv[1] == "image_classification_with_model":
-            pass
+            computer_vision_analysis_obj = classification_with_model()
+
 
         # Localization and Detection 
         if sys.argv[1] == "localization_and_detection":
