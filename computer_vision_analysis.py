@@ -17,11 +17,9 @@ if __name__ == "__main__":
         if sys.argv[1] == "image_classification_with_model":
             computer_vision_analysis_obj = classification_with_model()
 
-
         # Localization and Detection 
         if sys.argv[1] == "localization_and_detection":
             computer_vision_analysis_obj = computer_vision_localization_detection()
-
 
         # Transfer Learning 
         if sys.argv[1] == "transfer_learning":

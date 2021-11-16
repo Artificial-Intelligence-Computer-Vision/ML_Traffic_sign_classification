@@ -1,3 +1,5 @@
+from header_imports import *
+
 class traffic_sign_categories:
 
     category_names = ["Speed limit (20km/h)",
@@ -89,4 +91,16 @@ class traffic_sign_categories:
             "Roundabout mandatory", 
             "End of no passing", 
             "End of no passing by vehicles over 3.5 metric tons"]
+
+
+
+
+
+class transfer_learning_config(Config):
+    name = "transfer learning traffic signs"
+    num_classes = 43 + 1
+    gpu_count = 1
+    images_per_gpu = 1
+    image_min_dim = 256
+    image_max_dim = 256 
 

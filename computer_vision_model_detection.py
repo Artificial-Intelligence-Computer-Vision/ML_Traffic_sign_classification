@@ -1,5 +1,11 @@
 from header_imports import *
 
+class transfer_learning_config(Config):
+    NAME = "transfer learning traffic signs"
+    NUM_CLASSES = 43 + 1
+    GPU_COUNT = 1
+    IMAGE_PER_GPU = 1
+
 class computer_vision_localization_detection(object):
     def __init__(self, currently_build_model = "normal_category_1_model1_computer_vision_categories_43_model.h5"):
         
@@ -10,11 +16,10 @@ class computer_vision_localization_detection(object):
         
         self.path_to_model = "models/"
         self.save_model_path = self.path_to_model + "/transfer_learning_model/"
+        self.save_model_path = os.path.join(self.save_model_path, "logs")
         self.currently_build_model = self.path_to_model + currently_build_model
 
-        self.images = [count for count in glob(self.image_path +'*') if 'png' in count]
-        
-        self.prediction_config = Transfer_Learning_Config()
+        self.prediction_config = transfer_learning_config()
         self.model = modellib.MaskRCNN(mode='inference', model_dir=self.save_model_path, config=self.prediction_config)
         self.model.load_weights(self.currently_build_model, by_name=True) 
 

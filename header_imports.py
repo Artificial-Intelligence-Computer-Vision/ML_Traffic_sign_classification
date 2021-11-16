@@ -32,6 +32,17 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 import keras
 
+from mrcnn import utils, visualize
+import mrcnn.model as modellib
+from mrcnn.config import Config
+from mrcnn import model as modellib, utils
+
+from pycocotools.coco import COCO
+from pycocotools.cocoeval import COCOeval
+from pycocotools import mask as maskUtils
+import zipfile
+import urllib.request
+
 # from object_detection.builders import model_builder
 # from object_detection.utils import config_util, label_map_util, visualization_utils as viz_utils
 
@@ -41,7 +52,6 @@ from keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Conv2D, Flatten, Dense, MaxPooling2D, Dropout, Activation
 from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping
-
 from tensorflow.keras.utils import to_categorical
 import matplotlib.image as img
 
@@ -52,7 +62,7 @@ plt.style.use('ggplot')
 
 from computer_vision_model_building import *
 from computer_vision_model_training import *
-# from computer_vision_model_transfer_learning import *
-# from computer_vision_model_detection import *
+from computer_vision_model_transfer_learning import *
+from computer_vision_model_detection import *
 from computer_vision_model_classification import *
 from utilities import *
