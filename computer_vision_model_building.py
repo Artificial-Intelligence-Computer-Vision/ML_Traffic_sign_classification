@@ -44,15 +44,15 @@ class computer_vision_building(object):
         self.category_names_3 = traffic_sign_categories.category_names_3	
 
         if self.category == "category_1":
-            self.category_names = self.category_names_1
+            self.model_categories = self.category_names_1
         elif self.category == "category_2":
-            self.category_names = self.category_names_2
+            self.model_categories = self.category_names_2
         elif self.category == "category_3":
-            self.category_names = self.category_names_3
+            self.model_categories = self.category_names_3
         elif self.category == "normal":
-            self.category_names = self.categories
+            self.model_categories = self.categories
         elif self.category == "regular":
-            self.category_names = self.category_names
+            self.model_categories = self.category_names
 	
         # Split training data variables
         self.X_train = None

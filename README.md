@@ -8,4 +8,4 @@
 
 4. Use transfer learning for the different categories
 
-5. Use RL for image learning with new input image while it is detecting and localizing and gaining new data, with transfer learning::
+5. Use RL for image learning with new input image while it is detecting and localizing and gaining new data, with transfer learning
