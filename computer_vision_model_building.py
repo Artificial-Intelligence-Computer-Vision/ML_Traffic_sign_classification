@@ -27,7 +27,6 @@ class computer_vision_building(object):
         elif self.image_type == "train3":
             self.true_path = self.path + "Train_3_25/"
 
-        
         self.valid_images = [".jpg",".png"]
         self.input_shape = None
         self.advanced_categories = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30","31", "32", "33", "34", "35", "36", "37", "38","39", "40", "41", "42"]
@@ -213,7 +212,6 @@ class computer_vision_building(object):
         self.X_train, self.X_test, self.Y_train_vec, self.Y_test_vec = train_test_split(self.image_file, self.label_name, test_size = 0.10, random_state = 42)
 
         self.input_shape = self.X_train.shape[1:]
-        
         self.Y_train = tf.keras.utils.to_categorical(self.Y_train_vec, self.number_classes)
         self.Y_test = tf.keras.utils.to_categorical(self.Y_test_vec, self.number_classes)
 
