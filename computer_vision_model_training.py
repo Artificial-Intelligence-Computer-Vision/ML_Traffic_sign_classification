@@ -17,7 +17,7 @@ class computer_vision_training(computer_vision_building):
         self.callbacks = keras.callbacks.EarlyStopping(monitor='val_acc', patience=4, verbose=1)
 
         self.earlyStop = EarlyStopping(patience=2)
-        self.learining_rate_reduction = ReduceLROnPlateau(monitor='val_accuracy',patience=2,verbose=1,factor= 0.5,min_lr=0.00001)
+        self.learining_rate_reduction = ReduceLROnPlateau(monitor='val_accuracy', patience=2, verbose=1, factor= 0.5, min_lr=0.00001)
         
         self.callbacks_2 = self.earlyStop, self.learining_rate_reduction
         

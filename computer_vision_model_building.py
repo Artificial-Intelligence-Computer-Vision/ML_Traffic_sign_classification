@@ -7,15 +7,13 @@ class computer_vision_building(object):
         self.images = []
         self.filename = []
         self.image_file = []
-        # 0 for False and 1 for True for label name
         self.label_name = []
         self.number_classes = 43
-        self.image_size = 256
+        self.image_size = 224
         self.path  = "traffic_signs/"
         self.image_type = image_type
         self.category = category
 
-        # Determine
         if self.image_type == "small_traffic_sign":
             self.true_path = self.path + "Small_Traffic_Sign/"
         elif self.image_type == "regular":
@@ -53,74 +51,60 @@ class computer_vision_building(object):
         elif self.category == "regular":
             self.model_categories = self.category_names
 	
-        # Split training data variables
         self.X_train = None
         self.X_test = None
         self.Y_train_vec = None
         self.Y_test_vec = None
 
-        # model informations
         self.model = None
         
-        # model summary path 
         self.model_summary = "model_summary/"
 
         self.optimizer = tf.keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999)
         self.create_model_type = model_type
         
         if self.category == "category_1":
-	        # Check validity
             for i in range(0, 15):
                 self.check_valid(self.advanced_categories_1[i])
 
         elif self.category == "category_2":
-	        # Check validity
             for i in range(0, 14):
                 self.check_valid(self.advanced_categories_2[i])
 
         elif self.category == "category_3":
-	        # Check validity
             for i in range(0, 14):
                 self.check_valid(self.advanced_categories_3[i])
 
         elif self.category == "regular":
-            # Check validity
             for i in range(0, 43):
                 self.check_valid(self.advanced_categories[i])
 
         elif self.category == "normal":
-            # Check validity
             for i in range(0, 7):
                 self.check_valid(self.categories[i])
 
 
         if self.category == "category_1":
-	        # Resize image
             for i in range(0,15):
                 self.resize_image_and_label_image(self.advanced_categories_1[i])
                    	
         elif self.category == "category_2":
-	        # Resize image
             for i in range(0,14):
                 self.resize_image_and_label_image(self.advanced_categories_2[i])
            
         elif self.category == "category_3":
-	        # Resize image
             for i in range(0,14):
                 self.resize_image_and_label_image(self.advanced_categories_3[i])
                    
         elif self.category == "regular":
-            # Resize image
             for i in range(0,43):
                 self.resize_image_and_label_image(self.advanced_categories[i])
 
         elif self.category == "normal":
-            # Resize image
             for i in range(0,7):
                 self.resize_image_and_label_image(self.categories[i])
 
 
-        # Numpy array
         self.image_file = np.array(self.image_file)
         self.label_name = np.array(self.label_name)
         self.label_name = self.label_name.reshape((len(self.image_file),1))
@@ -141,7 +125,6 @@ class computer_vision_building(object):
 
 
 
-    # Checks to see if the image is valid or not
     def check_valid(self, input_file):
         for img in os.listdir(self.true_path + input_file):
             ext = os.path.splitext(img)[1]
@@ -149,7 +132,6 @@ class computer_vision_building(object):
                 continue
     
 
-    # Resize images
     def resize_image_and_label_image(self, input_file):
         for image in os.listdir(self.true_path + input_file):
             
@@ -207,7 +189,6 @@ class computer_vision_building(object):
 
 
 
-    # Split training data and testing Data and makes it random and normalized it
     def splitting_data_normalize(self):
         self.X_train, self.X_test, self.Y_train_vec, self.Y_test_vec = train_test_split(self.image_file, self.label_name, test_size = 0.10, random_state = 42)
 
@@ -216,10 +197,8 @@ class computer_vision_building(object):
         self.Y_test = tf.keras.utils.to_categorical(self.Y_test_vec, self.number_classes)
 
         # Normalize
-        self.X_train = self.X_train.astype("float32")
-        self.X_train /= 255
-        self.X_test = self.X_test.astype("float32")
-        self.X_test /= 255
+        self.X_train = self.X_train.astype("float32") / 255
+        self.X_test = self.X_test.astype("float32") / 255
 
 
     def create_models_1(self):
