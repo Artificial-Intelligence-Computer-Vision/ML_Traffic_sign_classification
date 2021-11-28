@@ -4,8 +4,6 @@ class computer_vision_building(object):
 
     def __init__(self, model_type, image_type, category):
 
-        self.images = []
-        self.filename = []
         self.image_file = []
         self.label_name = []
         self.number_classes = 43
@@ -13,6 +11,26 @@ class computer_vision_building(object):
         self.path  = "traffic_signs/"
         self.image_type = image_type
         self.category = category
+        self.valid_images = [".jpg",".png"]
+        self.model_type = model_type
+        self.model_summary = "model_summary/"
+        
+        self.optimizer = tf.keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999)
+        self.setup_structure()
+        self.splitting_data_normalize()
+
+        if self.model_type == "model1":
+            self.create_models_1()
+        elif self.model_type == "model2":
+            self.create_models_2()
+        elif self.model_type == "model3":
+            self.create_model_3()
+
+        self.save_model_summary()
+        print("finished")
+    
+
+    def setup_structure(self):
 
         if self.image_type == "small_traffic_sign":
             self.true_path = self.path + "Small_Traffic_Sign/"
@@ -25,12 +43,8 @@ class computer_vision_building(object):
         elif self.image_type == "train3":
             self.true_path = self.path + "Train_3_25/"
 
-        self.valid_images = [".jpg",".png"]
-        self.input_shape = None
         self.advanced_categories = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30","31", "32", "33", "34", "35", "36", "37", "38","39", "40", "41", "42"]
-        
         self.categories = ["One Way Right", "Slow Xing", "Yield", "One Way Left", "Traffic Light Sign", "Stop", "Ducky"]
-
         self.advanced_categories_1 = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14"]
         self.advanced_categories_2 = ["15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"]
         self.advanced_categories_3 = ["29", "30","31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42"]
@@ -51,18 +65,6 @@ class computer_vision_building(object):
         elif self.category == "regular":
             self.model_categories = self.category_names
 	
-        self.X_train = None
-        self.X_test = None
-        self.Y_train_vec = None
-        self.Y_test_vec = None
-
-        self.model = None
-        
-        self.model_summary = "model_summary/"
-
-        self.optimizer = tf.keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999)
-        self.create_model_type = model_type
-        
         if self.category == "category_1":
             for i in range(0, 15):
                 self.check_valid(self.advanced_categories_1[i])
@@ -83,7 +85,6 @@ class computer_vision_building(object):
             for i in range(0, 7):
                 self.check_valid(self.categories[i])
 
-
         if self.category == "category_1":
             for i in range(0,15):
                 self.resize_image_and_label_image(self.advanced_categories_1[i])
@@ -103,25 +104,6 @@ class computer_vision_building(object):
         elif self.category == "normal":
             for i in range(0,7):
                 self.resize_image_and_label_image(self.categories[i])
-
-
-        self.image_file = np.array(self.image_file)
-        self.label_name = np.array(self.label_name)
-        self.label_name = self.label_name.reshape((len(self.image_file),1))
-
-        self.splitting_data_normalize()
-
-        if self.create_model_type == "model1":
-            self.create_models_1()
-        elif self.create_model_type == "model2":
-            self.create_models_2()
-        elif self.create_model_type == "model3":
-            self.create_model_3()
-
-        # Saving model summary
-        self.save_model_summary()
-        
-        print("finished")
 
 
 
@@ -186,6 +168,9 @@ class computer_vision_building(object):
                     else:
                         print("error")
 
+        self.image_file = np.array(self.image_file)
+        self.label_name = np.array(self.label_name)
+        self.label_name = self.label_name.reshape((len(self.image_file),1))
 
 
 
@@ -195,8 +180,6 @@ class computer_vision_building(object):
         self.input_shape = self.X_train.shape[1:]
         self.Y_train = tf.keras.utils.to_categorical(self.Y_train_vec, self.number_classes)
         self.Y_test = tf.keras.utils.to_categorical(self.Y_test_vec, self.number_classes)
-
-        # Normalize
         self.X_train = self.X_train.astype("float32") / 255
         self.X_test = self.X_test.astype("float32") / 255
 
@@ -205,25 +188,17 @@ class computer_vision_building(object):
 
         self.model = Sequential()
 
-        # First Hitten Layer with 64, 7, 7
         self.model.add(Conv2D(filters=64,kernel_size=(7,7), strides = (1,1), padding="same", input_shape = self.input_shape, activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (4,4)))
         self.model.add(Dropout(0.25))
-    
-        # Second Hitten Layer 32, 7, 7
         self.model.add(Conv2D(filters=32,kernel_size=(7,7), strides = (1,1), padding="same", activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (2,2)))
         self.model.add(Dropout(0.25))
-    
-        # Third Hitten Layer 32, 7, 7
         self.model.add(Conv2D(filters=16,kernel_size=(7,7), strides = (1,1), padding="same", activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (1,1)))
         self.model.add(Dropout(0.25))
-    
-        # last layer, output Layer
         self.model.add(Flatten())
         self.model.add(Dense(units = self.number_classes, activation = "softmax", input_dim=2))
-
         self.model.compile(loss = "binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
         return self.model
@@ -236,21 +211,16 @@ class computer_vision_building(object):
 
         self.model.add(Conv2D(filters=32, kernel_size=(3,3), activation="relu", input_shape = self.input_shape))
         self.model.add(Conv2D(filters=32, kernel_size=(3,3), activation="relu"))
-
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
         self.model.add(Dropout(rate=0.25))
-
         self.model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
         self.model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
-
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
         self.model.add(Dropout(rate=0.25))
         self.model.add(Flatten())
-
         self.model.add(Dense(512, activation="relu"))
         self.model.add(Dropout(rate=0.5))
         self.model.add(Dense(units = self.number_classes, activation="softmax"))
-        
         self.model.compile(loss = 'binary_crossentropy', optimizer ='adam', metrics= ['accuracy'])
 	
         return self.model
@@ -260,15 +230,12 @@ class computer_vision_building(object):
     def create_model_3(self):
 
         self.model = Sequential()
-        
         self.MyConv(first = True)
         self.MyConv()
         self.MyConv()
         self.MyConv()
-
         self.model.add(Flatten())
         self.model.add(Dense(units = self.number_classes, activation = "softmax", input_dim=2))
-
         self.model.compile(loss = "binary_crossentropy", optimizer ="adam", metrics= ["accuracy"])
         
         return self.model
@@ -287,14 +254,12 @@ class computer_vision_building(object):
         self.model.add(Activation("relu"))
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
         self.model.add(Dropout(0.5))
-
         self.model.add(Conv2D(32, (4, 4),strides = (1,1),padding="same"))
         self.model.add(Activation("relu"))
         self.model.add(Dropout(0.25))
 
 
 
-    # Save the model summery as a txt file
     def save_model_summary(self):
 
         with open(self.model_summary + self.create_model_type +"_summary_architecture_" + str(self.number_classes) +".txt", "w+") as model:
