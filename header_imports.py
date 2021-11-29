@@ -6,12 +6,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from glob import glob
 from os.path import basename
-from PIL import Image
+from PIL import Image, ImageDraw
 from tensorflow import keras
 import tensorflow as tf
 
 from imgaug import augmenters as iaa
 from tqdm import tqdm
+from random import randint
 
 from os import listdir
 from xml.etree import ElementTree
@@ -44,6 +45,7 @@ import zipfile
 import urllib.request
 from tensorflow.keras import Model
 
+from tensorflow import convert_to_tensor
 from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras import layers
