@@ -1,12 +1,10 @@
 from header_imports import *
 
 class computer_vision_building(object):
-
     def __init__(self, model_type, image_type, category):
 
         self.image_file = []
         self.label_name = []
-        self.number_classes = 43
         self.image_size = 224
         self.path  = "traffic_signs/"
         self.image_type = image_type
@@ -14,8 +12,8 @@ class computer_vision_building(object):
         self.valid_images = [".jpg",".png"]
         self.model_type = model_type
         self.model_summary = "model_summary/"
-        
         self.optimizer = tf.keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999)
+
         self.setup_structure()
         self.splitting_data_normalize()
 
@@ -56,31 +54,33 @@ class computer_vision_building(object):
 
         if self.category == "category_1":
             self.model_categories = self.category_names_1
+            self.number_classes = 15
         elif self.category == "category_2":
             self.model_categories = self.category_names_2
+            self.number_classes = 14
         elif self.category == "category_3":
             self.model_categories = self.category_names_3
+            self.number_classes = 14
         elif self.category == "normal":
             self.model_categories = self.categories
+            self.number_classes = 7
         elif self.category == "regular":
             self.model_categories = self.category_names
+            self.number_classes = 43
+
 	
         if self.category == "category_1":
             for i in range(0, 15):
                 self.check_valid(self.advanced_categories_1[i])
-
         elif self.category == "category_2":
             for i in range(0, 14):
                 self.check_valid(self.advanced_categories_2[i])
-
         elif self.category == "category_3":
             for i in range(0, 14):
                 self.check_valid(self.advanced_categories_3[i])
-
         elif self.category == "regular":
             for i in range(0, 43):
                 self.check_valid(self.advanced_categories[i])
-
         elif self.category == "normal":
             for i in range(0, 7):
                 self.check_valid(self.categories[i])
@@ -88,19 +88,15 @@ class computer_vision_building(object):
         if self.category == "category_1":
             for i in range(0,15):
                 self.resize_image_and_label_image(self.advanced_categories_1[i])
-                   	
         elif self.category == "category_2":
             for i in range(0,14):
                 self.resize_image_and_label_image(self.advanced_categories_2[i])
-           
         elif self.category == "category_3":
             for i in range(0,14):
                 self.resize_image_and_label_image(self.advanced_categories_3[i])
-                   
         elif self.category == "regular":
             for i in range(0,43):
                 self.resize_image_and_label_image(self.advanced_categories[i])
-
         elif self.category == "normal":
             for i in range(0,7):
                 self.resize_image_and_label_image(self.categories[i])
@@ -108,6 +104,7 @@ class computer_vision_building(object):
 
 
     def check_valid(self, input_file):
+
         for img in os.listdir(self.true_path + input_file):
             ext = os.path.splitext(img)[1]
             if ext.lower() not in self.valid_images:
@@ -115,12 +112,11 @@ class computer_vision_building(object):
     
 
     def resize_image_and_label_image(self, input_file):
+
         for image in os.listdir(self.true_path + input_file):
-            
             image_resized = cv2.imread(os.path.join(self.true_path + input_file,image))
             image_resized = cv2.resize(image_resized,(self.image_size, self.image_size), interpolation = cv2.INTER_AREA)
             self.image_file.append(image_resized)
-            
 
             if self.category == "regular":
                 for i in range(0, 43):
@@ -173,10 +169,9 @@ class computer_vision_building(object):
         self.label_name = self.label_name.reshape((len(self.image_file),1))
 
 
-
     def splitting_data_normalize(self):
-        self.X_train, self.X_test, self.Y_train_vec, self.Y_test_vec = train_test_split(self.image_file, self.label_name, test_size = 0.10, random_state = 42)
 
+        self.X_train, self.X_test, self.Y_train_vec, self.Y_test_vec = train_test_split(self.image_file, self.label_name, test_size = 0.10, random_state = 42)
         self.input_shape = self.X_train.shape[1:]
         self.Y_train = tf.keras.utils.to_categorical(self.Y_train_vec, self.number_classes)
         self.Y_test = tf.keras.utils.to_categorical(self.Y_test_vec, self.number_classes)
@@ -187,7 +182,6 @@ class computer_vision_building(object):
     def create_models_1(self):
 
         self.model = Sequential()
-
         self.model.add(Conv2D(filters=64,kernel_size=(7,7), strides = (1,1), padding="same", input_shape = self.input_shape, activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (4,4)))
         self.model.add(Dropout(0.25))
@@ -203,12 +197,10 @@ class computer_vision_building(object):
 
         return self.model
 
-
     
     def create_models_2(self):
 
         self.model = Sequential()
-
         self.model.add(Conv2D(filters=32, kernel_size=(3,3), activation="relu", input_shape = self.input_shape))
         self.model.add(Conv2D(filters=32, kernel_size=(3,3), activation="relu"))
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -226,7 +218,6 @@ class computer_vision_building(object):
         return self.model
 
 
-
     def create_model_3(self):
 
         self.model = Sequential()
@@ -239,11 +230,9 @@ class computer_vision_building(object):
         self.model.compile(loss = "binary_crossentropy", optimizer ="adam", metrics= ["accuracy"])
         
         return self.model
-
         
 
     def MyConv(self, first = False):
-
         if first == False:
             self.model.add(Conv2D(64, (4, 4),strides = (1,1), padding="same",
                 input_shape = self.input_shape))
@@ -257,7 +246,6 @@ class computer_vision_building(object):
         self.model.add(Conv2D(32, (4, 4),strides = (1,1),padding="same"))
         self.model.add(Activation("relu"))
         self.model.add(Dropout(0.25))
-
 
 
     def save_model_summary(self):

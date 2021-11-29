@@ -21,7 +21,6 @@ class computer_vision_training(computer_vision_building):
         
         self.callbacks_2 = self.earlyStop, self.learining_rate_reduction
         
-        # Train
         self.name = "category_1"
         self.train_model()
         self.evaluate_model()
@@ -30,12 +29,10 @@ class computer_vision_training(computer_vision_building):
         
 
 
-    #  Training model 
     def train_model(self):
        
         grid = GridSearchCV(estimator = self.model, param_grid = self.param_grid, n_jobs = 1, cv = 3, verbose = 10)
         
-        # Determine where the training time starts
         start = "starting --: "
         self.get_training_time(start)
 
@@ -46,14 +43,12 @@ class computer_vision_training(computer_vision_building):
                 callbacks=[self.callbacks_2],
                 shuffle=True)
 
-        # Determine when the training time ends
         start = "ending --: " 
         self.get_training_time(start)
         
         self.model.save_weights("models/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + "_computer_vision_categories_"+ str(self.number_classes)+"_model.h5")
    
 
-    # Evaluate model
     def evaluate_model(self):
         evaluation = self.model.evaluate(self.X_test, self.Y_test, verbose=1)
 
@@ -66,10 +61,8 @@ class computer_vision_training(computer_vision_building):
 
 
 
-    # PLotting model
     def plot_model(self):
 
-        # Computer Vision modeling
         plt.plot(self.computer_vision_model.history['accuracy'])
         plt.plot(self.computer_vision_model.history['val_accuracy'])
         plt.title('model accuracy')
@@ -77,7 +70,7 @@ class computer_vision_training(computer_vision_building):
         plt.xlabel('epoch')
         plt.legend(['train', 'Validation'], loc='upper left')
         plt.savefig("graph_charts/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + '_accuracy_' + str(self.number_classes) + '.png', dpi =500)
-
+        plt.clf()
 
         plt.plot(self.computer_vision_model.history['loss'])
         plt.plot(self.computer_vision_model.history['val_loss'])
@@ -86,7 +79,7 @@ class computer_vision_training(computer_vision_building):
         plt.xlabel('epoch')
         plt.legend(['train', 'Validation'], loc='upper left')
         plt.savefig("graph_charts/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + '_lost_' + str(self.number_classes) +'.png', dpi =500)
-
+        plt.clf()
 
 
     def plot_random_examples(self):
@@ -104,7 +97,6 @@ class computer_vision_training(computer_vision_building):
 
 
 
-    # Record time for the training
     def get_training_time(self, start):
 
         date_and_time = datetime.datetime.now()

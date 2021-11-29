@@ -1,7 +1,6 @@
 from header_imports import *
 
 class traffic_sign_categories:
-
     category_names = ["Speed limit (20km/h)",
             "Speed limit (30km/h)", 
             "Speed limit (50km/h)", 
@@ -91,9 +90,6 @@ class traffic_sign_categories:
             "Roundabout mandatory", 
             "End of no passing", 
             "End of no passing by vehicles over 3.5 metric tons"]
-
-
-
 
 
 class transfer_learning_config(Config):

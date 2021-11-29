@@ -42,6 +42,7 @@ from pycocotools.cocoeval import COCOeval
 from pycocotools import mask as maskUtils
 import zipfile
 import urllib.request
+from tensorflow.keras import Model
 
 from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
 from tensorflow.keras.preprocessing import image
