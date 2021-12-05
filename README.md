@@ -9,3 +9,5 @@
 4. Use transfer learning for the different categories or for more pictures 
 
 5. Use RL for image learning with new input image while it is detecting and localizing and gaining new data, with transfer learning
+
+6. Compare PPO and DQLearning
