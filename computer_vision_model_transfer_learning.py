@@ -117,7 +117,7 @@ class computer_vision_transfer_learning(object):
         return self.model
 
 
- def save_model_summary(self):
+    def save_model_summary(self):
         with open(self.model_summary + self.create_model_type +"_summary_architecture_transfer_learning_" + str(self.number_classes) +".txt", "w+") as model:
             with redirect_stdout(model):
                 self.model.summary()

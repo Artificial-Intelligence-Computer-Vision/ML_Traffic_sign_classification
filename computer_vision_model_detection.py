@@ -35,21 +35,19 @@ class computer_vision_localization_detection(utils.Dataset):
         self.model.load_weights(self.currently_build_model, by_name=True) 
 
         self.category_names = traffic_sign_categories.category_names
-        self.category_names_1 = traffic_sign_categories.category_names_1            			
-        self.category_names_2 = traffic_sign_categories.category_names_2            			
-        self.category_names_3 = traffic_sign_categories.category_names_3
         self.categories = traffic_sign_categories.categories
+
+        self.name_directory = {self.category_names[0]: 1, self.category_names[1]: 2, self.category_names[2]: 3, self.category_names[3]: 4, self.category_names[4]: 5, self.category_names[5]: 6, self.category_names[6]: 7, self.category_names[7]: 8, self.category_names[8]: 9, self.category_names[9]: 10
+                self.category_names[10]: 11, self.category_names[11]: 12, self.category_names[12]: 13, self.category_names[13]: 14, self.category_names[14]: 15, self.category_names[15]: 16, self.category_names[16]: 17, self.category_names[17]: 18, self.category_names[18]: 19, self.category_names[19]: 20}
+                self.category_names[20]: 21, self.category_names[21]: 22, self.category_names[22]: 23, self.category_names[23]: 24, self.category_names[24]: 25, self.category_names[25]: 26, self.category_names[26]: 27, self.category_names[27]: 28, self.category_names[28]: 29, self.category_names[29]: 30}
+                self.category_names[30]: 31, self.category_names[31]: 32, self.category_names[32]: 33, self.category_names[33]: 34, self.category_names[34]: 35, self.category_names[35]: 36, self.category_names[36]: 37, self.category_names[37]: 38, self.category_names[38]: 39, self.category_names[39]: 40}
+                self.category_names[40]: 41, self.category_names[41]: 42, self.category_names[42]: 43}
+
 
         for i in range(0, 43):
             self.add_class(detection_name, i, self.category_names[i])
 
-        if self.category == "category_1":
-            self.category_names = self.category_names_1
-        elif self.category == "category_2":
-            self.category_names = self.category_names_2
-        elif self.category == "category_3":
-            self.category_names = self.category_names_3
-        elif self.category == "normal":
+        if self.category == "normal":
             self.category_names = self.categories
         elif self.category == "regular":
             self.category_names = self.category_names 
@@ -77,8 +75,8 @@ class computer_vision_localization_detection(utils.Dataset):
 
         assert subset in ["train", "val"]
         dataset_dir = os.path.join(dataset_dir, subset)
-        annotations1 = json.load(open('D:/MaskRCNN-aar/Dataset/train/demo_json.json'))
 
+        annotations1 = json.load(open('D:/MaskRCNN-aar/Dataset/train/demo_json.json'))
         annotations = list(annotations1.values())
         annotations = [a for a in annotations if a['regions']]
         
@@ -91,7 +89,7 @@ class computer_vision_localization_detection(utils.Dataset):
 
             image_path = os.path.join(dataset_dir, a['filename'])
             image = skimage.io.imread(image_path)
-            height, width = image.shape[:2]
+            heigh:waitt, width = image.shape[:2]
 
             self.add_image("object", image_id=a['filename'], path=image_path, width=width, height=height, polygons=polygons, num_ids=num_ids)
 
