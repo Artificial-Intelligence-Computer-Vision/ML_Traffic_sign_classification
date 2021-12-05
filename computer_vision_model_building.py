@@ -42,7 +42,6 @@ class computer_vision_building(object):
             self.true_path = self.path + "Train_3_25/"
 
         self.advanced_categories = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30","31", "32", "33", "34", "35", "36", "37", "38","39", "40", "41", "42"]
-        self.categories = ["One Way Right", "Slow Xing", "Yield", "One Way Left", "Traffic Light Sign", "Stop", "Ducky"]
         self.advanced_categories_1 = ["0", "1", "2", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14"]
         self.advanced_categories_2 = ["15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"]
         self.advanced_categories_3 = ["29", "30","31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42"]
@@ -50,7 +49,9 @@ class computer_vision_building(object):
         self.category_names = traffic_sign_categories.category_names
         self.category_names_1 = traffic_sign_categories.category_names_1            			
         self.category_names_2 = traffic_sign_categories.category_names_2            			
-        self.category_names_3 = traffic_sign_categories.category_names_3	
+        self.category_names_3 = traffic_sign_categories.category_names_3
+        self.categories = traffic_sign_categories.categories
+
 
         if self.category == "category_1":
             self.model_categories = self.category_names_1

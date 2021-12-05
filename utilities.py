@@ -91,12 +91,5 @@ class traffic_sign_categories:
             "End of no passing", 
             "End of no passing by vehicles over 3.5 metric tons"]
 
-
-class transfer_learning_config(Config):
-    name = "transfer learning traffic signs"
-    num_classes = 43 + 1
-    gpu_count = 1
-    images_per_gpu = 1
-    image_min_dim = 256
-    image_max_dim = 256 
+     categories = ["One Way Right", "Slow Xing", "Yield", "One Way Left", "Traffic Light Sign", "Stop", "Ducky"]
 

@@ -1,6 +1,6 @@
 # Copyright © 2021 Ronaldson Bellande
 from __future__ import print_function
-import cv2, sys, math, random, warnings, os, os.path, json, pydicom, glob, shutil, datetime
+import cv2, sys, math, random, warnings, os, os.path, json, pydicom, glob, shutil, datetime, zipfile, urllib.request, keras,  tensorflow as tf
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,8 +8,6 @@ from glob import glob
 from os.path import basename
 from PIL import Image, ImageDraw
 from tensorflow import keras
-import tensorflow as tf
-
 from imgaug import augmenters as iaa
 from tqdm import tqdm
 from random import randint
@@ -31,18 +29,17 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC 
 from sklearn.ensemble import RandomForestClassifier
-import keras
 
 from mrcnn import utils, visualize
 import mrcnn.model as modellib
 from mrcnn.config import Config
 from mrcnn import model as modellib, utils
+from mrcnn.visualize import display_images, display_instances
+from mrcnn.model import log
 
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
 from pycocotools import mask as maskUtils
-import zipfile
-import urllib.request
 from tensorflow.keras import Model
 
 from tensorflow import convert_to_tensor
@@ -50,9 +47,6 @@ from tensorflow.keras.applications.imagenet_utils import preprocess_input, decod
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras import layers
 from tensorflow.keras.applications import EfficientNetB0
-
-# from object_detection.builders import model_builder
-# from object_detection.utils import config_util, label_map_util, visualization_utils as viz_utils
 
 from keras.datasets import cifar10
 import keras.backend as K
