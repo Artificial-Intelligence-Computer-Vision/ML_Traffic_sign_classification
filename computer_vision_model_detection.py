@@ -89,7 +89,7 @@ class computer_vision_localization_detection(utils.Dataset):
 
             image_path = os.path.join(dataset_dir, a['filename'])
             image = skimage.io.imread(image_path)
-            heigh:waitt, width = image.shape[:2]
+            height, width = image.shape[:2]
 
             self.add_image("object", image_id=a['filename'], path=image_path, width=width, height=height, polygons=polygons, num_ids=num_ids)
 
