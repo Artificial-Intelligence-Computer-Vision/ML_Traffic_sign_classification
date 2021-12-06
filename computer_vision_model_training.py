@@ -2,7 +2,7 @@ from header_imports import *
 
 class computer_vision_training(computer_vision_building):
     def __init__(self, model_type, image_type, category):
-        super.__init__(model_type, image_type, category)
+        super().__init__(model_type, image_type, category)
         
         self.number_classes = 43
         self.model_type = str(model_type)

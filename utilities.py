@@ -91,5 +91,5 @@ class traffic_sign_categories:
             "End of no passing", 
             "End of no passing by vehicles over 3.5 metric tons"]
 
-     categories = ["One Way Right", "Slow Xing", "Yield", "One Way Left", "Traffic Light Sign", "Stop", "Ducky"]
+    categories = ["One Way Right", "Slow Xing", "Yield", "One Way Left", "Traffic Light Sign", "Stop", "Ducky"]
 
