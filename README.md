@@ -11,3 +11,5 @@
 5. Use RL for image learning with new input image while it is detecting and localizing and gaining new data, with transfer learning
 
 6. Compare PPO and DQLearning
+
+7. Add 10 interation of random noise image for each immage 
