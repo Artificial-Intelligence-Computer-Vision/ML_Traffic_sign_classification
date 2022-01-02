@@ -62,6 +62,23 @@ from multiprocessing import Pool
 warnings.filterwarnings('ignore')
 plt.style.use('ggplot')
 
+nvidia_smi.nvmlInit()
+handle = nvidia_smi.nvmlDeviceGetHandleByIndex(0)
+info = nvidia_smi.nvmlDeviceGetMemoryInfo(handle)
+
+if info.free < 964157696:
+    os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
+from tensorflow.python.client import device_lib
+device_name = [x.name for x in device_lib.list_local_devices() if x.device_type == 'GPU']
+
+if device_name != []:
+    device_name = "/device:GPU:0"
+    print("GPU")
+else:
+    device_name = "/device:CPU:0"
+    print("CPU")
+
 from computer_vision_model_building import *
 from computer_vision_model_training import *
 from computer_vision_model_classification import *
