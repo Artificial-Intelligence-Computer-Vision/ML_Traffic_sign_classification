@@ -8,7 +8,6 @@ class computer_vision_training(computer_vision_building):
         self.model_type = str(model_type)
         self.image_type = str(image_type)
         self.category = str(category)
-        
         self.number_images_to_plot = 100
 
         self.batch_size = [10, 20, 40, 60, 80, 100]
@@ -18,7 +17,6 @@ class computer_vision_training(computer_vision_building):
 
         self.earlyStop = EarlyStopping(patience=2)
         self.learining_rate_reduction = ReduceLROnPlateau(monitor='val_accuracy', patience=2, verbose=1, factor= 0.5, min_lr=0.00001)
-        
         self.callbacks_2 = self.earlyStop, self.learining_rate_reduction
         
         self.name = "category_1"
@@ -33,18 +31,16 @@ class computer_vision_training(computer_vision_building):
        
         grid = GridSearchCV(estimator = self.model, param_grid = self.param_grid, n_jobs = 1, cv = 3, verbose = 10)
         
-        start = "starting --: "
-        self.get_training_time(start)
+        self.get_training_time("starting --: ")
 
         self.computer_vision_model = self.model.fit(self.X_train, self.Y_train,
-                batch_size=self.batch_size[2],
+                batch_size=self.batch_size[4],
                 validation_split=0.10,
-                epochs=self.epochs[3],
+                epochs=self.epochs[2],
                 callbacks=[self.callbacks_2],
                 shuffle=True)
 
-        start = "ending --: " 
-        self.get_training_time(start)
+        self.get_training_time("ending --: ")
         
         self.model.save_weights("models/" + self.image_type + "_" + self.category + "_" + self.name + "_" + self.model_type + "_computer_vision_categories_"+ str(self.number_classes)+"_model.h5")
    

@@ -1,6 +1,6 @@
 # Copyright © 2021 Ronaldson Bellande
 from __future__ import print_function
-import cv2, sys, math, random, warnings, os, os.path, json, pydicom, glob, shutil, datetime, zipfile, urllib.request, keras,  tensorflow as tf
+import cv2, sys, math, random, warnings, os, os.path, json, pydicom, glob, shutil, datetime, zipfile, urllib.request, keras,  tensorflow as tf, time
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,7 +11,10 @@ from tensorflow import keras
 from imgaug import augmenters as iaa
 from tqdm import tqdm
 from random import randint
+import trimesh
+import librosa
 
+import nvidia_smi
 from os import listdir
 from xml.etree import ElementTree
 from matplotlib import pyplot
@@ -31,11 +34,11 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 
 from mrcnn import utils, visualize
-import mrcnn.model as modellib
+# import mrcnn.model as modellib
 from mrcnn.config import Config
-from mrcnn import model as modellib, utils
+# from mrcnn import model as modellib, utils
 from mrcnn.visualize import display_images, display_instances
-from mrcnn.model import log
+# from mrcnn.model import log
 
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
@@ -52,8 +55,8 @@ from keras.datasets import cifar10
 import keras.backend as K
 from keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Conv2D, Flatten, Dense, MaxPooling2D, Dropout, Activation
-from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping
+from tensorflow.keras.layers import Conv2D, Flatten, Dense, MaxPooling2D, Dropout, Activation, LSTM
+from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping, TensorBoard, ModelCheckpoint
 from tensorflow.keras.utils import to_categorical
 import matplotlib.image as img
 
@@ -78,7 +81,6 @@ if device_name != []:
 else:
     device_name = "/device:CPU:0"
     print("CPU")
-
 from computer_vision_model_building import *
 from computer_vision_model_training import *
 from computer_vision_model_classification import *
