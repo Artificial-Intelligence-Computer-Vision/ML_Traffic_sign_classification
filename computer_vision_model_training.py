@@ -81,7 +81,7 @@ class computer_vision_training(computer_vision_building):
     def plot_random_examples(self):
 
         plt.figure(dpi=256)
-        predicted_classes = self.model.predict_classes(self.X_test)
+        predicted_classes = self.model.predict(self.X_test)
 
         for i in range(self.number_images_to_plot):
             plt.subplot(10,10,i+1)

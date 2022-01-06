@@ -71,10 +71,9 @@ class computer_vision_transfer_learning(object):
 
             if self.category == "regular":
                 for i in range(0, 43):
+                    print(i)
                     if input_file == str(i):
                         self.label_name.append(i)
-                    else:
-                        print("error")
             
             elif self.category == "normal":
                 if input_file == "One Way Right":

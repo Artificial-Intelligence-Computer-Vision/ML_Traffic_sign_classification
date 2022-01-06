@@ -1,6 +1,6 @@
 from header_imports import *
 
-class computer_vision_building(object):
+class computer_vision_building(traffic_sign_categories):
     def __init__(self, model_type, image_type, category):
 
         self.image_file = []
@@ -86,6 +86,7 @@ class computer_vision_building(object):
             for i in range(0, 7):
                 self.check_valid(self.categories[i])
 
+
         if self.category == "category_1":
             for i in range(0,15):
                 self.resize_image_and_label_image(self.advanced_categories_1[i])
@@ -101,6 +102,11 @@ class computer_vision_building(object):
         elif self.category == "normal":
             for i in range(0,7):
                 self.resize_image_and_label_image(self.categories[i])
+
+
+        self.image_file = np.array(self.image_file)
+        self.label_name = np.array(self.label_name)
+        self.label_name = self.label_name.reshape((len(self.image_file),1))
 
 
 
@@ -121,10 +127,8 @@ class computer_vision_building(object):
 
             if self.category == "regular":
                 for i in range(0, 43):
-                    if input_file == str(i):
+                    if str(input_file) == str(i):
                         self.label_name.append(i)
-                    else:
-                        print("error")
             
             elif self.category == "normal":
                 if input_file == "One Way Right":
@@ -148,26 +152,16 @@ class computer_vision_building(object):
                 for i in range(0, 15):
                     if input_file == str(i):
                         self.label_name.append(i)
-                    else:
-                        print("error")
             
             elif self.category == "category_2":
                 for i in range(15, 29):
                     if input_file == str(i):
                         self.label_name.append(i)
-                    else:
-                        print("error")
  
             elif self.category == "category_3":
                 for i in range(29, 43):
                     if input_file == str(i):
                         self.label_name.append(i)
-                    else:
-                        print("error")
-
-        self.image_file = np.array(self.image_file)
-        self.label_name = np.array(self.label_name)
-        self.label_name = self.label_name.reshape((len(self.image_file),1))
 
 
     def splitting_data_normalize(self):
@@ -251,7 +245,7 @@ class computer_vision_building(object):
 
     def save_model_summary(self):
 
-        with open(self.model_summary + self.create_model_type +"_summary_architecture_" + str(self.number_classes) +".txt", "w+") as model:
+        with open(self.model_summary + self.model_type +"_summary_architecture_" + str(self.number_classes) +".txt", "w+") as model:
             with redirect_stdout(model):
                 self.model.summary()
 

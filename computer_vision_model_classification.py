@@ -35,7 +35,7 @@ class classification_with_model(object):
     def plot_prediction_with_model(self):
 
         plt.figure(dpi=500)
-        predicted_classes = self.model.predict_classes(self.X_test)
+        predicted_classes = self.model.predict(self.X_test)
 
         for i in range(self.number_images_to_plot):
             plt.subplot(10,10,i+1)
