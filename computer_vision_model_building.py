@@ -12,6 +12,7 @@ class computer_vision_building(traffic_sign_categories):
         self.valid_images = [".jpg",".png"]
         self.model_type = model_type
         self.model_summary = "model_summary/"
+        self.number_of_nodes = 32
         self.optimizer = tf.keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999)
 
         self.setup_structure()
@@ -177,13 +178,13 @@ class computer_vision_building(traffic_sign_categories):
     def create_models_1(self):
 
         self.model = Sequential()
-        self.model.add(Conv2D(filters=64,kernel_size=(7,7), strides = (1,1), padding="same", input_shape = self.input_shape, activation = "relu"))
+        self.model.add(Conv2D(filters=64, kernel_size=(7,7), strides = (1,1), padding="same", input_shape = self.input_shape, activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (4,4)))
         self.model.add(Dropout(0.25))
-        self.model.add(Conv2D(filters=32,kernel_size=(7,7), strides = (1,1), padding="same", activation = "relu"))
+        self.model.add(Conv2D(filters=32, kernel_size=(7,7), strides = (1,1), padding="same", activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (2,2)))
         self.model.add(Dropout(0.25))
-        self.model.add(Conv2D(filters=16,kernel_size=(7,7), strides = (1,1), padding="same", activation = "relu"))
+        self.model.add(Conv2D(filters=16, kernel_size=(7,7), strides = (1,1), padding="same", activation = "relu"))
         self.model.add(MaxPooling2D(pool_size = (1,1)))
         self.model.add(Dropout(0.25))
         self.model.add(Flatten())
@@ -205,7 +206,7 @@ class computer_vision_building(traffic_sign_categories):
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
         self.model.add(Dropout(rate=0.25))
         self.model.add(Flatten())
-        self.model.add(Dense(512, activation="relu"))
+        self.model.add(Dense(units=self.number_of_nodes, activation="relu"))
         self.model.add(Dropout(rate=0.5))
         self.model.add(Dense(units = self.number_classes, activation="softmax"))
         self.model.compile(loss = 'binary_crossentropy', optimizer ='adam', metrics= ['accuracy'])
