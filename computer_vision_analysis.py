@@ -9,7 +9,6 @@ if __name__ == "__main__":
 
         if sys.argv[1] == "model_training":
             computer_vision_analysis_obj = computer_vision_training(model_type = sys.argv[2], image_type = sys.argv[3], category = sys.argv[4])
-        
        
         if sys.argv[1] == "image_prediction":
 
@@ -38,9 +37,4 @@ if __name__ == "__main__":
 
         if sys.argv[1] == "segmentation":
             computer_vision_analysis_obj = computer_vision_segmentation(model = sys.argv[2])
-
-        if sys.argv[1] == "transfer_learning":
-            computer_vision_analysis_obj = computer_vision_transfer_learning(currently_build_model = sys.argv[2], image_type = sys.argv[3], category = sys.argv[4])
-
-
 

@@ -2,7 +2,7 @@ from header_imports import *
 
 
 class classification_with_model(object):
-    def __init__(self, model =  "normal_category_1_model1_computer_vision_categories_43_model.h5"):
+    def __init__(self, model):
 
         self.model = keras.models.load_model("models/" + model)
         self.image_path = "traffic_signs" + "/Test"
@@ -21,7 +21,7 @@ class classification_with_model(object):
     def prepare_image_data(self):
 
         for image in os.listdir(self.image_path):
-            image_resized = cv2.imread(os.path.join(self.image_path,image))
+            image_resized = cv2.imread(os.path.join(self.image_path, image))
             image_resized = cv2.resize(image_resized,(self.image_size, self.image_size), interpolation = cv2.INTER_AREA)
             self.image_file.append(image_resized)
             self.label_name.append(1)

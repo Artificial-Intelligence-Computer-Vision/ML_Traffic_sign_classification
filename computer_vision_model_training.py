@@ -10,14 +10,15 @@ class computer_vision_training(computer_vision_building):
         self.category = str(category)
         self.number_images_to_plot = 100
 
+        self.graph_path = "graph_charts/"
+        self.model_path = "models/" 
         self.batch_size = [10, 20, 40, 60, 80, 100]
         self.epochs = [1, 5, 15, 50, 100, 200]
         self.param_grid = dict(batch_size = self.batch_size, epochs = self.epochs)
-        self.callbacks = keras.callbacks.EarlyStopping(monitor='val_acc', patience=4, verbose=1)
-
-        self.earlyStop = EarlyStopping(patience=2)
-        self.learining_rate_reduction = ReduceLROnPlateau(monitor='val_accuracy', patience=2, verbose=1, factor= 0.5, min_lr=0.00001)
-        self.callbacks_2 = self.earlyStop, self.learining_rate_reduction
+        
+        self.callback_1 = TensorBoard(log_dir="logs/{}-{}".format(self.model_type, int(time.time())))
+        self.callback_2 = ModelCheckpoint(filepath=self.model_path, save_weights_only=True, verbose=1)
+        self.callback_3 = ReduceLROnPlateau(monitor='val_accuracy', patience=2, verbose=1, factor= 0.5, min_lr=0.00001)
         
         self.name = "category_1"
         self.train_model()
@@ -37,7 +38,7 @@ class computer_vision_training(computer_vision_building):
                 batch_size=self.batch_size[4],
                 validation_split=0.10,
                 epochs=self.epochs[2],
-                callbacks=[self.callbacks_2],
+                callbacks=[self.callback_1, self.callback_2, self.callback_3],
                 shuffle=True)
 
         self.get_training_time("ending --: ")
